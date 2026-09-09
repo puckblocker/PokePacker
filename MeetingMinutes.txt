@@ -1,1 +1,11 @@
 Meeting Minutes: 
+9/8/2026 -  4:30pm-5:00pm
+  - Nathalie did Sections 1 and 2 of SRS Doc
+  - Madison added a handful of user stories
+  - Seth thought up a name for the website and replaced it in the docs
+  - Brayden organized our user stories doc
+9/9/2026 - 12pm-1:45pm
+  - Madison added the rest of the section headings and filled out some information on the SRS doc and user stories doc
+  - Nathalie worked on filling out the SRS document sections and adding some more user stories
+  - Seth created and worked out all of the "creating an account" steps and added to the user stories
+  - Brayden translated the user stories into the system requirements
