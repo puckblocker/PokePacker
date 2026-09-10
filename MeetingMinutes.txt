@@ -9,3 +9,8 @@ Meeting Minutes:
   - Nathalie worked on filling out the SRS document sections and adding some more user stories
   - Seth created and worked out all of the "creating an account" steps and added to the user stories
   - Brayden translated the user stories into the system requirements
+9/10/2026 3:15-5:00
+  -Madison worked on the system features info and priority ratings
+  -Nathalie added systems features 
+  -Seth worked on Other Requirements
+  -Brayden worked on Non-Func Requirements
