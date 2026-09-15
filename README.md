@@ -1,5 +1,5 @@
 # PokePacker
-This is an e-commerce website for a selling / buying pokemon cards
+PokePacker is an e-commerce website designed for the purchasing and selling of Pokemon TCG cards. The site will be able to support a growing audience of differing users (buyers, sellers, admins, and visitors).
 
 **Sprint 1:**\
 The Work: \
