@@ -14,3 +14,8 @@ Meeting Minutes:
   -Nathalie added systems features 
   -Seth worked on Other Requirements
   -Brayden worked on Non-Func Requirements
+9/17/2026 3:15-5:00
+  -Nathalie worked on diagrams for Admin user stories
+  -Seth worked on diagrams for Seller user stories
+  -Brayden worked on diagrams for Buyer user stories
+  -Madison worked on diagrams for Buyer user stories
