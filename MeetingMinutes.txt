@@ -24,3 +24,9 @@ Meeting Minutes:
   -Seth worked on his diagrams
   -Nathalie worked on diagrams
   -Brayden worked on diagrams
+9/29/2026 3:15-7:00
+  -Madison worked on the Arch and Class Diagram
+  -Nathalie worked on finishing Issues with Seth and the Component Diagrams
+  -Seth input all User Stories as Issues
+  -Brayden worked on finishing his Individual Graphs
+  -Everyone uploaded their diagrams to the shared google drive file.
