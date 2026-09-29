@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="0rK10HJpRMnDtsOU7HnX">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-1" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Buyer" vertex="1">
+          <mxGeometry height="300" width="120" x="70" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-5" parent="lXc-Kmi7ZQpk5LJDKjjk-1" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="80" width="65" x="27.5" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="Database" vertex="1">
+          <mxGeometry height="300" width="100" x="500" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-7" parent="lXc-Kmi7ZQpk5LJDKjjk-3" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="80" width="65" x="17.5" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-4" parent="1" style="html=1;whiteSpace=wrap;" value="Review Item&lt;div&gt;(Buyer)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="110" x="-40" y="-30" as="geometry" />
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-12" edge="1" parent="1" source="lXc-Kmi7ZQpk5LJDKjjk-5" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=40;exitPerimeter=0;" target="lXc-Kmi7ZQpk5LJDKjjk-11" value="Write Item Review">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="190" />
+            </Array>
+            <mxPoint x="187.5" y="155" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-14" edge="1" parent="1" source="lXc-Kmi7ZQpk5LJDKjjk-11" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=70;exitPerimeter=0;" target="lXc-Kmi7ZQpk5LJDKjjk-7" value="Attach Review to Item">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="410" y="220" />
+            </Array>
+            <mxPoint x="320" y="190" as="sourcePoint" />
+            <mxPoint x="407" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-16" edge="1" parent="1" source="lXc-Kmi7ZQpk5LJDKjjk-7" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" target="lXc-Kmi7ZQpk5LJDKjjk-11" value="Send Confirmation Message">
+          <mxGeometry relative="1" width="80" as="geometry">
+            <Array as="points">
+              <mxPoint x="298.5" y="265" />
+            </Array>
+            <mxPoint x="470" y="290" as="sourcePoint" />
+            <mxPoint x="550" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-17" edge="1" parent="1" source="lXc-Kmi7ZQpk5LJDKjjk-11" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" target="lXc-Kmi7ZQpk5LJDKjjk-1" value="Display Confirmation Message">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="339.75" y="290" />
+            </Array>
+            <mxPoint x="550" y="290" as="sourcePoint" />
+            <mxPoint x="470" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-18" edge="1" parent="1" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=sequenceEdgeStyle;libavoidRouting=0;curved=0;rounded=0;exitX=1;exitY=0;exitDx=0;exitDy=40;exitPerimeter=0;" target="lXc-Kmi7ZQpk5LJDKjjk-2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="320" y="190" as="sourcePoint" />
+            <mxPoint x="488" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="API" vertex="1">
+          <mxGeometry height="300" width="105" x="264" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lXc-Kmi7ZQpk5LJDKjjk-11" parent="lXc-Kmi7ZQpk5LJDKjjk-2" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;sequenceEdgeStyle&quot;,&quot;libavoidRouting&quot;:0,&quot;curved&quot;:0,&quot;rounded&quot;:0};" value="" vertex="1">
+          <mxGeometry height="120" width="65" x="20" y="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
