@@ -1,0 +1,45 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="uDSdPpfDl-aImGnP6Fs0">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-1" parent="1" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="100" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-2" edge="1" parent="1" source="rFJfHsrN-JS4JAuQG2kB-1" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" value="Click My Favorites button" vertex="1">
+          <mxGeometry height="40" width="120" x="55" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-4" edge="1" parent="1" source="rFJfHsrN-JS4JAuQG2kB-3" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" value="Click Delete Icon" vertex="1">
+          <mxGeometry height="40" width="120" x="55" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-6" edge="1" parent="1" source="rFJfHsrN-JS4JAuQG2kB-5" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=40;fontColor=#000000;fillColor=#ffffc0;strokeColor=#ff0000;" value="Dismiss Confirmation PopUp" vertex="1">
+          <mxGeometry height="40" width="120" x="55" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-8" edge="1" parent="1" source="rFJfHsrN-JS4JAuQG2kB-7" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rFJfHsrN-JS4JAuQG2kB-9" parent="1" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="100" y="460" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
