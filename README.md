@@ -14,3 +14,9 @@ For Sprint 2, each member was present for our meetings. We worked mainly on crea
 
 The Information:\
 The diagrams contain information that illustrate our user stories. There are activity diagrams, state diagrams, sequence diagrams, component diagrams, an architecture diagram, and use case diagrams. The user stories were also used to create our GitHub issues. The GitHub issues set up a list of task that we need to finish as we continue to work on the project.
+
+**Sprint 3:**\
+The Work: \
+
+
+The Information:\
