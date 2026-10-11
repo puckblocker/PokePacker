@@ -1,13 +1,19 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CreateAccount from "./Visitor/CreateAccount.jsx";
+import VisitorHome from "./Visitor/VisitorHome.jsx";
 
 function App() {
-  const [time, setTime] = useState({});
-
   return (
     <div>
-    <p> Welcome to PokéPacker! </p>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<VisitorHome />} />
+          <Route path="/visitor/register" element={<CreateAccount />} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
