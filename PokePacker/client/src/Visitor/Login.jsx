@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   // VARIABLES
   const [time, setTime] = useState({});
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  // SEND USER INFO TO BACKEND
+  // LOGIN INFO BACKEND FRONTEND INTERACTION
   async function sendLoginInfo() {
     // PACKAGE INFO
     const userData = {
@@ -24,6 +26,31 @@ function Login() {
           body: JSON.stringify(userData),
         },
       );
+      // GRAB TOKEN
+      const data = await response.json();
+
+      // STORE TOKEN LOCALLY (WILL CHANGE METHOD EVENTUALLY)
+      if (response.ok) {
+        localStorage.setItem("packer_token", data.token);
+        localStorage.setItem("packer_type", data.type); // save account type
+
+        console.log("Token Saved.");
+
+        const userType = localStorage.getItem("packer_type");
+
+        // SETUP DESTINATIONS
+        const routes = {
+          buyer: "/buyer/home",
+          seller: "/seller/home",
+          admin: "/admin/home",
+        };
+
+        // SEND TO HOME PAGE
+        const dest = routes[userType] || "/";
+        navigate(dest);
+      } else {
+        console.error("Token Failed To Save: ", data.message);
+      }
     } catch (error) {
       console.error("Error: ", error);
     }

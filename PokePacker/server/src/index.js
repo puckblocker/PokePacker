@@ -1,7 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import { connectDB } from './config/db.js';
+import { connectDB } from '../config/db.js';
+import { verifyToken } from '../config/auth.js';
 import createUserHandler from './Visitor/createUser.js';
 import loginHandler from './Visitor/loginUser.js';
 
@@ -15,6 +16,13 @@ app.use(express.json());
 
 app.use('/api', createUserHandler);
 app.use('/api', loginHandler);
+
+app.get('/api/verifyToken', verifyToken, (req, res) => {
+  res.json({
+    valid: true,
+    user: req.user
+  });
+})
 
 app.get('/api/health', (req, res) => {
   res.json({ ok: true });
