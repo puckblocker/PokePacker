@@ -6,9 +6,12 @@ function VisitorHome() {
 
   return (
     <div>
-      <h1> Welcome to PokéPacker! </h1>
+      <h1> Welcome to PokéPacker! (Visitor) </h1>
       <Link to="/visitor/register">
         <button>Create Account</button>
+      </Link>
+      <Link to="/visitor/login">
+        <button>Login</button>
       </Link>
     </div>
   );

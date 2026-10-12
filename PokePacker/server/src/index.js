@@ -2,7 +2,8 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { connectDB } from './config/db.js';
-import loginHandler from './Visitor/loginHandler.js';
+import createUserHandler from './Visitor/createUser.js';
+import loginHandler from './Visitor/loginUser.js';
 
 const app = express();
 connectDB();
@@ -12,6 +13,7 @@ const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 app.use(cors({ origin: CLIENT_ORIGIN }));
 app.use(express.json());
 
+app.use('/api', createUserHandler);
 app.use('/api', loginHandler);
 
 app.get('/api/health', (req, res) => {

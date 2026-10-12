@@ -36,7 +36,9 @@ router.post(`/createUser`, async (req, res) => {
       `INSERT INTO account (username, email, password_hash, status, type) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
       [userName, email, hash, status, type]
     );
-  } catch(error) {
+  } 
+  catch(error) 
+  {
     console.error(`Error executing query: `, error);
     return res.status(500).json({error: `Failed to create user`});
   }
