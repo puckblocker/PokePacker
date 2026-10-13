@@ -30,3 +30,7 @@ Meeting Minutes:
   -Seth input all User Stories as Issues
   -Brayden worked on finishing his Individual Graphs
   -Everyone uploaded their diagrams to the shared google drive file.
+10/8/2026 12:00 - 5:00
+  -Nathalie got started on the data base. She also set up the client and server.
+  -Seth started getting information on how to set up login and auth.
+  -Madison and Brayden started documentation on how to set up the Admin and Seller.
