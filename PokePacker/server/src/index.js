@@ -2,12 +2,15 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { connectDB } from './config/db.js';
+import adminRouter from'./admin/admin.js';
 
 const app = express();
 connectDB();
 const PORT = process.env.PORT || 4000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 
+//Connect admin to server
+app.use('/api/admin', adminRouter);
 
 app.use(cors({ origin: CLIENT_ORIGIN }));
 app.use(express.json());
