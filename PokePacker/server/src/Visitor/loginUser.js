@@ -17,10 +17,11 @@ router.post(`/loginUser`, async (req, res) => {
     );
 
     // CHECK FOR VALID ACCOUNT
-    if (result.rows.length === 0 && result.rows[0].status === 'approved')
+    if (result.rows.length === 0)
     {
       return res.status(401).json({message: `Invalid Login.`});
     }
+
 
     // VALIDATE LOGIN INFO
     const type = result.rows[0].type;
@@ -31,6 +32,13 @@ router.post(`/loginUser`, async (req, res) => {
     if(!validPassword)
     {
         return res.status(401).json({message: `Invalid Login.`});
+    }
+
+       //Check for account approval (madison)
+    if (result.rows[0].status !== 'approved'){
+      return res.status(403).json({
+        message: 'Your account is awaiting admin aproval'
+      });
     }
 
     // GENERATE JWT TOKEN
