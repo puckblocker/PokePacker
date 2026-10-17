@@ -34,3 +34,7 @@ Meeting Minutes:
   -Nathalie got started on the data base. She also set up the client and server.
   -Seth started getting information on how to set up login and auth.
   -Madison and Brayden started documentation on how to set up the Admin and Seller.
+10/17/2026 2:00-2:45  
+  -Discussed how far along everyone is and what is completed/still needs to be completed
+  -Decided next meeting times
+  -Everyone was present
