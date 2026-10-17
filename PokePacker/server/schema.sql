@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS orders, cart, item_review, listing, account;
-DROP TYPE IF EXISTS order_status, account_status, account_type;
+DROP TYPE IF EXISTS order_status, account_status, account_type, listing_status;
 
 CREATE TYPE order_status AS ENUM
   ('pending', 'paid', 'shipped', 'delivered', 'cancelled');
@@ -9,6 +9,9 @@ CREATE TYPE account_status AS ENUM
 
 CREATE TYPE account_type AS ENUM
   ('buyer', 'seller', 'admin');
+
+CREATE TYPE listing_status AS ENUM
+  ('active', 'removed');
 
 CREATE TABLE account (
     id            SERIAL PRIMARY KEY,
@@ -27,7 +30,8 @@ CREATE TABLE listing (
 	condition 	 VARCHAR(100)	NOT NULL,
 	price		 INTEGER		NOT NULL,
 	image		 TEXT,
-	description  VARCHAR(300)
+	description  VARCHAR(300),
+	status       listing_status  NOT NULL
 );
 
 CREATE TABLE item_reviews (
