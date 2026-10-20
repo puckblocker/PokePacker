@@ -100,6 +100,7 @@ function CreateListing() {
                     required
                 />
                 <label>Condition: </label>
+                {/*
                 <input
                     id = "condition"
                     name = "condition"
@@ -108,6 +109,21 @@ function CreateListing() {
                     onChange={handleChange}
                     required
                 />
+                */}
+                <select
+                        id = "condition"
+                        name = "condition"
+                        type="text"
+                        value={form.condition}
+                        onChange={handleChange}
+                        required
+                        >
+                            <option value="new">New</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="damaged">Damaged</option>
+
+                </select>
+
                 <label>Price: </label>
                 <input
                     id = "price"
