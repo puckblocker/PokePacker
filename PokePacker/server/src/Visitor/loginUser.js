@@ -12,7 +12,9 @@ router.post(`/loginUser`, async (req, res) => {
   // CHECK USERNAME AGAINST DATABASE
   try {
     const result = await pool.query(
-      `SELECT status, password_hash, type FROM account WHERE username = $1`,  // $1 to combat sql injection
+      `SELECT status, password_hash, type, denial_reason
+      FROM account
+      WHERE username = $1`,
       [userName]
     );
 
@@ -33,12 +35,21 @@ router.post(`/loginUser`, async (req, res) => {
     {
         return res.status(401).json({message: `Invalid Login.`});
     }
+  
+    //MADISON CODE: PASSWORD DENAL REASONING STUFF
+    if (result.rows[0].status == 'denied'){
+      return res.status(403).json({
+        message: `Your account was denied. Reason ${result.rows[0].denial_reason}`
+      });
+    }
+
 
        //Check for account approval (madison)
     if (result.rows[0].status !== 'approved'){
       return res.status(403).json({
         message: 'Your account is awaiting admin aproval'
       });
+
     }
 
     // GENERATE JWT TOKEN
