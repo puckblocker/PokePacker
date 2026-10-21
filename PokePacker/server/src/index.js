@@ -7,6 +7,9 @@ import adminRouter from './admin/admin.js'
 import { verifyToken } from '../config/auth.js';
 import createUserHandler from './Visitor/createUser.js';
 import loginHandler from './Visitor/loginUser.js';
+import createListingHandler from "./seller/createListing.js";
+import showListingHandler from "./seller/showListings.js"
+import deleteListingHandler from "./seller/deleteListing.js"
 
 const app = express();
 connectDB();
@@ -21,6 +24,9 @@ app.use('/api/admin', adminRouter);
 
 app.use('/api', createUserHandler);
 app.use('/api', loginHandler);
+app.use('/api', createListingHandler);
+app.use('/api', showListingHandler);
+app.use('/api', deleteListingHandler);
 
 app.get('/api/verifyToken', verifyToken, (req, res) => {
   res.json({
