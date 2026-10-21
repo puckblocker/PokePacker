@@ -12,7 +12,7 @@ router.post(`/loginUser`, async (req, res) => {
   // CHECK USERNAME AGAINST DATABASE
   try {
     const result = await pool.query(
-      `SELECT status, password_hash, type FROM account WHERE username = $1`,  // $1 to combat sql injection
+      `SELECT status, password_hash, id, type FROM account WHERE username = $1`,  // $1 to combat sql injection
       [userName]
     );
 
@@ -25,6 +25,7 @@ router.post(`/loginUser`, async (req, res) => {
     // VALIDATE LOGIN INFO
     const type = result.rows[0].type;
     const storedHash = result.rows[0].password_hash;
+    const id = result.rows[0].id;
     const validPassword = bcrypt.compareSync(password, storedHash);
 
     // REJECT LOGIN
@@ -36,6 +37,7 @@ router.post(`/loginUser`, async (req, res) => {
     // GENERATE JWT TOKEN
     const token = jwt.sign({ 
         username: userName,
+        id: id,
         type: type},
         process.env.JWT_SECRET,
         {
