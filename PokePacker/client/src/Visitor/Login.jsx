@@ -7,6 +7,7 @@ function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   // LOGIN INFO BACKEND FRONTEND INTERACTION
   async function sendLoginInfo() {
@@ -28,6 +29,11 @@ function Login() {
       );
       // GRAB TOKEN
       const data = await response.json();
+
+      if(!response.ok){
+        setError(data.message || "Login Failed.");
+        return;
+      }
 
       // STORE TOKEN LOCALLY (WILL CHANGE METHOD EVENTUALLY)
       if (response.ok) {
@@ -72,6 +78,7 @@ function Login() {
         value={password}
         onChange={(event) => setPassword(event.target.value)}
       ></input>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <button onClick={() => sendLoginInfo()}>Login</button>
     </div>
   );

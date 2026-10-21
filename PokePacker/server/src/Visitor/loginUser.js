@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { pool } from '../config/db.js';
+import { pool } from '../../config/db.js';
 
 const router = express.Router();
 
@@ -12,15 +12,16 @@ router.post(`/loginUser`, async (req, res) => {
   // CHECK USERNAME AGAINST DATABASE
   try {
     const result = await pool.query(
-      `SELECT status, password_hash, id, type FROM account WHERE username = $1`,  // $1 to combat sql injection
+      `SELECT status, password_hash, id, type, denial_reason FROM account WHERE username = $1`,  // $1 to combat sql injection
       [userName]
     );
 
     // CHECK FOR VALID ACCOUNT
-    if (result.rows.length === 0 && result.rows[0].status === 'approved')
+    if (result.rows.length === 0)
     {
       return res.status(401).json({message: `Invalid Login.`});
     }
+
 
     // VALIDATE LOGIN INFO
     const type = result.rows[0].type;
@@ -32,6 +33,22 @@ router.post(`/loginUser`, async (req, res) => {
     if(!validPassword)
     {
         return res.status(401).json({message: `Invalid Login.`});
+    }
+  
+    //MADISON CODE: PASSWORD DENAL REASONING STUFF
+    if (result.rows[0].status == 'denied'){
+      return res.status(403).json({
+        message: `Your account was denied. Reason ${result.rows[0].denial_reason}`
+      });
+    }
+
+
+       //Check for account approval (madison)
+    if (result.rows[0].status !== 'approved'){
+      return res.status(403).json({
+        message: 'Your account is awaiting admin aproval'
+      });
+
     }
 
     // GENERATE JWT TOKEN
