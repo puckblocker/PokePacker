@@ -102,6 +102,7 @@ useEffect(() => {
             <th>Price</th>
             <th>Image</th>
             <th>Description</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -114,6 +115,7 @@ useEffect(() => {
               <td><img src={listing.image} alt={listing.listing_name} width="100" />
               </td>
               <td>{listing.description}</td>
+              <td>{listing.status}</td>
               <td>
                 <button onClick={() => removeListing(listing.id)}>Remove</button>
               </td>

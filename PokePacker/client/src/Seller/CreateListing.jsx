@@ -62,7 +62,7 @@ function CreateListing() {
             });
         }
         catch(error) {
-            console.log(error);
+            console.error("Error: ", error);
         }
         
        
@@ -118,6 +118,7 @@ function CreateListing() {
                         onChange={handleChange}
                         required
                         >
+                            <option value="" disabled>Select Condition</option>
                             <option value="new">New</option>
                             <option value="moderate">Moderate</option>
                             <option value="damaged">Damaged</option>

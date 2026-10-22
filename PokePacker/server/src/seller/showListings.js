@@ -16,7 +16,7 @@ router.get('/showListings', verifyToken, async (req, res) => {
 
     try {
         const result = await pool.query(
-            `SELECT * FROM listing WHERE seller_id = $1 AND status = 'active'`,
+            `SELECT * FROM listing WHERE seller_id = $1 AND status != 'removed'`,
             [req.user.id]
         );
         res.status(200).json(result.rows);
