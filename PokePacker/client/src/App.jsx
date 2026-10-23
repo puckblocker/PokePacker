@@ -7,6 +7,8 @@ import BuyerHome from "./Buyer/BuyerHome.jsx";
 import SellerHome from "./Seller/SellerHome.jsx";
 import AdminHome from "./Admin/AdminHome.jsx";
 import CreateListing from "./Seller/CreateListing.jsx";
+import Cart from './Cart';
+import AccountManagement from './AccountManagement';
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Route path="/seller/home" element={<SellerHome seller_id={1} />} />
           <Route path="/seller/listing" element={<CreateListing seller_id={1} />} />
           <Route path="/admin/home" element={<AdminHome />} />
+          <Route path="/buyer/cart" element={<Cart />} />
+          <Route path="/buyer/account" element={<AccountManagement />} />
+          <Route path="/seller/account" element={<AccountManagement />} />
         </Routes>
       </BrowserRouter>
     </div>

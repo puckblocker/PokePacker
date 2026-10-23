@@ -5,6 +5,8 @@ function SellerHome() {
 
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
+  // MADISON CODE: Adding a notif for refund request  
+  const [refundRequests, setRefundRequests] = useState([]);
 
 // GETTING LISTINGS FROM SERVER
 useEffect(() => {
@@ -35,6 +37,33 @@ useEffect(() => {
   }
 
   loadListings();
+}, []);
+
+//MADISON CODE: LOADS REFUND REQUEST IF SELLER HAS ANY
+useEffect(() => {
+    async function loadRefundRequests() {
+        const token = localStorage.getItem("packer_token");
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/seller/refund-requests`,
+                {
+                headers: {
+                Authorization: `Bearer ${token}`
+                  }
+                }
+            );
+            if (!response.ok) {
+                throw new Error("Failed to fetch refund requests");
+            }
+
+            const data = await response.json();
+            setRefundRequests(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    loadRefundRequests();
 }, []);
 
   async function removeListing(listingId) {
@@ -78,6 +107,25 @@ useEffect(() => {
         <div>
           <h1> Welcome to PokéPacker! (Seller) </h1>
           <p>You have no listings yet.</p>
+          {/*MADISON CODE: SHOWS IF THE SELLER HAS REFUND REQUEST*/}
+            <section>
+                <h2>Refund Requests</h2>
+
+                {refundRequests.length === 0 ? (
+                    <p>No refund requests.</p>
+                ) : (
+                    refundRequests.map((request) => (
+                        <p key={request.id}>
+                            {request.buyer_username} has requested a refund for{" "}
+                            {request.listing_name}.
+                        </p>
+                    ))
+                )}
+            </section>
+            <Link to="/seller/account">
+              <button>Account Management</button>
+            </Link>
+
           <Link to="/seller/listing">
             <button>Create Listing</button>
           </Link>
@@ -90,6 +138,25 @@ useEffect(() => {
 
       <h1> Welcome to PokéPacker! (Seller) </h1>
       <Link to="/seller/listing">
+          {/*MADISON CODE: SHOWS IF THE SELLER HAS REFUND REQUEST*/}
+            <section>
+                <h2>Refund Requests</h2>
+
+                {refundRequests.length === 0 ? (
+                    <p>No refund requests.</p>
+                ) : (
+                    refundRequests.map((request) => (
+                        <p key={request.id}>
+                            {request.buyer_username} has requested a refund for{" "}
+                            {request.listing_name}.
+                        </p>
+                    ))
+                )}
+            </section>
+            <Link to="/seller/account">
+              <button>Account Management</button>
+            </Link>     
+
         <button>Create Listing</button>
       </Link>
 
