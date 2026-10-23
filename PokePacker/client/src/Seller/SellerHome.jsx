@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import EditListing from "./EditListing";
 
 function SellerHome() {
 
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(null);
 
 // GETTING LISTINGS FROM SERVER
 useEffect(() => {
@@ -62,7 +64,7 @@ useEffect(() => {
       }
 
       // Remove the listing from the state
-      setListings(listings.filter((listing) => listing.id !== listingId));
+      setListings((prev) => prev.filter((listing) => listing.id !== listingId));
     }
     catch (error) {
       console.log(error);
@@ -116,13 +118,28 @@ useEffect(() => {
               </td>
               <td>{listing.description}</td>
               <td>{listing.status}</td>
+              <th></th>
               <td>
+                <button onClick={() => setEditing(listing)}>Edit</button>
                 <button onClick={() => removeListing(listing.id)}>Remove</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {editing !== null && (
+        <EditListing
+          listing = {editing}
+          onClose = {() => setEditing(null)}
+          onSaved = {(updated) => {
+            setListings((prev) => prev.map((listing) => (listing.id === updated.id ? updated : listing)));
+            setEditing(null);
+          }}
+          />
+
+
+      )}
 
     </div>
   );
