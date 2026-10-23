@@ -30,7 +30,7 @@ function Login() {
       // GRAB TOKEN
       const data = await response.json();
 
-      if(!response.ok){
+      if (!response.ok) {
         setError(data.message || "Login Failed.");
         return;
       }

@@ -7,6 +7,11 @@ function BuyerHome() {
   return (
     <div>
       <h1> Welcome to PokéPacker! (Buyer) </h1>
+      <form role="search" action="/listings" method="get">
+        <label for="query"></label>
+        <input type="search" id="query" name="q" placeholder="Search..." />
+        <button type="submit">Search</button>
+      </form>
     </div>
   );
 }
