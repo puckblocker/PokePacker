@@ -11,6 +11,8 @@ import createListingHandler from "./seller/createListing.js";
 import showListingHandler from "./seller/showListings.js"
 import deleteListingHandler from "./seller/deleteListing.js"
 
+import { MEDIA_URL, MEDIA_ROOT } from '../config/config.js';
+
 const app = express();
 connectDB();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +29,9 @@ app.use('/api', loginHandler);
 app.use('/api', createListingHandler);
 app.use('/api', showListingHandler);
 app.use('/api', deleteListingHandler);
+
+
+app.use(MEDIA_URL, express.static(MEDIA_ROOT));
 
 app.get('/api/verifyToken', verifyToken, (req, res) => {
   res.json({
