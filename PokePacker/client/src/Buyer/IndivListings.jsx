@@ -6,7 +6,7 @@ function Listings() {
 
   return (
     <div>
-      <h1> All Listings! (Buyer) </h1>
+      <h1> Single Listings! (Buyer) </h1>
     </div>
   );
 }
