@@ -8,7 +8,10 @@ function CreateAccount() {
   const [password, setPassword] = useState("");
 
   // SEND USER INFO TO BACKEND
-  async function sendUserInfo() {
+  async function handleUserForm(event) {
+    // PREVENT PAGE REFRESH
+    event.preventDefault();
+
     // PACKAGE INFO
     const userData = {
       userName: userName,
@@ -35,25 +38,27 @@ function CreateAccount() {
     <div>
       <h1> Create an Account! </h1>
       {/* CREATE ACCOUNT INFO */}
-      <label>Username: </label>
-      <input
-        type="text"
-        value={userName}
-        onChange={(event) => setUserName(event.target.value)}
-      ></input>
-      <label>Email: </label>
-      <input
-        type="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-      ></input>
-      <label>Password: </label>
-      <input
-        type="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      ></input>
-      <button onClick={() => sendUserInfo()}>Create Account</button>
+      <form onSubmit={handleUserForm}>
+        <label>Username: </label>
+        <input
+          type="text"
+          value={userName}
+          onChange={(event) => setUserName(event.target.value)}
+        />
+        <label>Email: </label>
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <label>Password: </label>
+        <input
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <button type="submit">Create Account</button>
+      </form>
     </div>
   );
 }

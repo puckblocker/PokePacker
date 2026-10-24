@@ -11,6 +11,8 @@ import createListingHandler from "./seller/createListing.js";
 
 import showListingHandler from "./seller/showListings.js"
 import deleteListingHandler from "./seller/deleteListing.js"
+import searchResults from "./buyer/getSearchResults.js";
+import itemDetails from "./buyer/getItemDetails.js";
 import editListingHandler from "./seller/editListing.js";
 
 import cartRouter from './Buyer/cart.js';
@@ -34,6 +36,8 @@ app.use('/api', loginHandler);
 app.use('/api', createListingHandler);
 app.use('/api', showListingHandler);
 app.use('/api', deleteListingHandler);
+app.use('/api', searchResults);
+app.use('/api', itemDetails)
 app.use('/api', cartRouter);
 app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
