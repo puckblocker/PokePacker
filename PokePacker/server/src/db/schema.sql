@@ -22,7 +22,8 @@ CREATE TABLE account (
 	password_hash VARCHAR(60)		UNIQUE NOT NULL,
 	email		  VARCHAR(254)		NOT NULL,
 	status        account_status    NOT NULL,
-	type          account_type		NOT NULL
+	type          account_type		NOT NULL,
+	denial_reason	text
 );
 
 CREATE TABLE listing (
