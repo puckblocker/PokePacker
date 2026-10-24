@@ -55,6 +55,24 @@ CREATE TABLE cart (
 CREATE TABLE orders (
     id      SERIAL PRIMARY KEY,
     account_id      INTEGER    NOT NULL     REFERENCES account(id),
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     status      order_status   NOT NULL
 );
 
+CREATE TABLE order_items (
+    id           SERIAL PRIMARY KEY,
+    order_id     INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    listing_id   INTEGER NOT NULL REFERENCES listing(id),
+    listing_name VARCHAR(100) NOT NULL,
+    quantity     INTEGER NOT NULL,
+    price        NUMERIC(10,2) NOT NULL
+);
+
+CREATE TABLE refund_requests (
+    id           SERIAL PRIMARY KEY,
+    order_item_id INTEGER NOT NULL REFERENCES order_items(id),
+    buyer_id     INTEGER NOT NULL REFERENCES account(id),
+    seller_id    INTEGER NOT NULL REFERENCES account(id),
+    status       VARCHAR(20) NOT NULL DEFAULT 'pending',
+    created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
