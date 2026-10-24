@@ -5,7 +5,7 @@ import { verifyToken } from "../../config/auth.js";
 const router = express.Router();
 
 // CREATE ITEM LISTING
-
+/*
 router.get('/editListing', verifyToken, async (req, res) => {
 
     if (req.user.type !== "seller")
@@ -35,7 +35,7 @@ router.get('/editListing', verifyToken, async (req, res) => {
 
         res.status(201).json({ message: 'Listing fetched successfully' });
 });
-
+*/
 router.put('/editListing', verifyToken, async (req, res) => {
     if (!req.user || req.user.type !== "seller")
     {

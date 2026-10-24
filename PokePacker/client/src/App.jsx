@@ -17,8 +17,8 @@ function App() {
           <Route path="/visitor/register" element={<CreateAccount />} />
           <Route path="/visitor/login" element={<Login />} />
           <Route path="/buyer/home" element={<BuyerHome />} />
-          <Route path="/seller/home" element={<SellerHome seller_id={1} />} />
-          <Route path="/seller/listing" element={<CreateListing seller_id={1} />} />
+          <Route path="/seller/home" element={<SellerHome />} />
+          <Route path="/seller/listing" element={<CreateListing />} />
           <Route path="/admin/home" element={<AdminHome />} />
         </Routes>
       </BrowserRouter>
