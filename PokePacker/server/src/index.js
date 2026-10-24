@@ -13,6 +13,7 @@ import showListingHandler from "./seller/showListings.js"
 import deleteListingHandler from "./seller/deleteListing.js"
 import searchResults from "./buyer/getSearchResults.js";
 import itemDetails from "./buyer/getItemDetails.js";
+import addToCart from "./buyer/addToCart.js";
 import editListingHandler from "./seller/editListing.js";
 
 import cartRouter from './Buyer/cart.js';
@@ -43,6 +44,7 @@ app.use('/api', itemDetails)
 app.use('/api', cartRouter);
 app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
+app.use('/api', addToCart);
 
 
 app.use(MEDIA_URL, express.static(MEDIA_ROOT));
