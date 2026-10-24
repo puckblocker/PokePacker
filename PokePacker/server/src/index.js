@@ -20,6 +20,8 @@ import accountRouter from '../Account/account.js';
 
 
 
+import { MEDIA_URL, MEDIA_ROOT } from '../config/config.js';
+
 const app = express();
 connectDB();
 const PORT = process.env.PORT || 5000;
@@ -41,6 +43,9 @@ app.use('/api', itemDetails)
 app.use('/api', cartRouter);
 app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
+
+
+app.use(MEDIA_URL, express.static(MEDIA_ROOT));
 
 app.get('/api/verifyToken', verifyToken, (req, res) => {
   res.json({

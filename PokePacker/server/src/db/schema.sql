@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS orders, cart, item_review, listing, account;
+DROP TABLE IF EXISTS orders, cart, item_review, listing, account CASCADE;
 DROP TYPE IF EXISTS order_status, account_status, account_type, condition, listing_status;
 
 CREATE TYPE order_status AS ENUM
@@ -31,14 +31,14 @@ CREATE TABLE listing (
 	seller_id	 INTEGER	    NOT NULL REFERENCES account(id),
     listing_name VARCHAR(100)   NOT NULL,
 	quantity	 INTEGER 		NOT NULL,
-	condition 	 condition	NOT NULL,
+	condition 	 condition		NOT NULL,
 	price		 INTEGER		NOT NULL,
 	image		 TEXT,
 	description  VARCHAR(300),
 	status       listing_status  NOT NULL
 );
 
-CREATE TABLE item_reviews (
+CREATE TABLE item_review (
 	id 	            SERIAL  PRIMARY KEY,
     listing_id      INTEGER         NOT NULL    REFERENCES listing(id),
     reviewer_id     INTEGER         NOT NULL    REFERENCES account(id),

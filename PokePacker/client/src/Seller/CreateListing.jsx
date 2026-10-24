@@ -10,9 +10,10 @@ function CreateListing() {
         condition: "",
         price: "",
         //seller_id: "",
-        image: "",
         description: ""
     });
+    const [imageFile, setImageFile] = useState(null);
+    const [error, setError] = useState("");
 
     function handleChange(event)
     {
@@ -23,13 +24,17 @@ function CreateListing() {
     // SENDING LISTING TO SERVER
     async function sendListing(event) {
         event.preventDefault();
-        
-        const listingData = {
-            ...form,
-            quantity: Number(form.quantity),
-            price: Number(form.price),
-            image: form.image || null,
-        }
+        setError("");
+
+        const formData = new FormData();
+        formData.append("listing_name", form.listing_name);
+        formData.append("description", form.description);
+        formData.append("quantity", form.quantity);
+        formData.append("condition", form.condition);
+        formData.append("price", form.price);
+        if (imageFile) formData.append("image", imageFile); // must match upload.single("image") in config/upload.js
+
+
 
         try {
 
@@ -40,15 +45,15 @@ function CreateListing() {
                 {
                     method: "POST",
                     headers: { 
-                        "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                      },
-                    body: JSON.stringify(listingData),
+                    body: formData,
                 },
             );
 
             if(!response.ok) {
-                throw new Error("${response.status}");
+                const data = await response.json().catch(() => ({}));
+                throw new Error(data.error || `Request failed with status ${response.status}`);
             }
 
             setForm({
@@ -56,13 +61,19 @@ function CreateListing() {
                 quantity: "",
                 condition: "",
                 price: "",
-                seller_id: "",
-                image: "",
                 description: ""
             });
+            
+            setImageFile(null);
+            event.target.reset();
+
+            alert("Listing created successfully");
+        
         }
-        catch(error) {
-            console.error("Error: ", error);
+
+        catch(err) {
+            console.error(err);
+            setError(err.message);
         }
         
        
@@ -94,6 +105,8 @@ function CreateListing() {
                 <input
                     id = "quantity"
                     name = "quantity"
+                    min="1"
+                    step="1"
                     type="number"
                     value={form.quantity}
                     onChange={handleChange}
@@ -118,10 +131,10 @@ function CreateListing() {
                         onChange={handleChange}
                         required
                         >
-                            <option value="" disabled>Select Condition</option>
-                            <option value="new">New</option>
-                            <option value="moderate">Moderate</option>
-                            <option value="damaged">Damaged</option>
+                        <option value="" disabled>Select condition</option>
+                        <option value="mint">Mint</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="damaged">Damaged</option>
 
                 </select>
 
@@ -130,14 +143,37 @@ function CreateListing() {
                     id = "price"
                     name = "price"
                     type="number"
+                    min="0"
+                    step="0.01"
                     value={form.price}
                     onChange={handleChange}
                     required
                 />
+
+                <label> Listing Image: </label>
+                <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    onChange={(event) => {
+                        setImageFile(event.target.files?.[0] ?? null);
+                    }}
+                />
+                {imageFile && (
+                    <p>Selected image: {imageFile.name}</p>
+                )}
+
+                {error && (
+                    <p role="alert" style={{ color: "red" }}>
+                        {error}
+                    </p>
+                )}
+
                 <button type="submit">Create Listing</button>
 
                 <Link to="/seller/home">
-                    <button>Back to Home</button>
+                    <button type="button">Back to Home</button>
                 </Link>
             </form>
         </div>
