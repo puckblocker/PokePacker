@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 function SearchResults() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q"); // READ URL
   const [results, setResults] = useState([]);
+  const [itemID, setItemID] = useState("");
 
   // CALL WHEN PAGE LOADS
   useEffect(() => {
@@ -33,7 +35,7 @@ function SearchResults() {
       <h2> Results for: {query}</h2>
       {results.map((item) => (
         <li key={item.id}>
-          <button onClick={() => console.log("Button Click")}>
+          <button onClick={() => navigate(`/item/${item.id}`)}>
             <strong>
               {item.listing_name} - ${item.price}
             </strong>

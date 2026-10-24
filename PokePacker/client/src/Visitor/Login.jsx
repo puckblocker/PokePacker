@@ -10,7 +10,9 @@ function Login() {
   const [error, setError] = useState("");
 
   // LOGIN INFO BACKEND FRONTEND INTERACTION
-  async function sendLoginInfo() {
+  async function handleLoginForm(evert) {
+    event.preventDefault();
+
     // PACKAGE INFO
     const userData = {
       userName: userName,
@@ -66,20 +68,21 @@ function Login() {
     <div>
       <h1> Login Page </h1>
       {/* CREATE ACCOUNT INFO */}
-      <label>Username: </label>
-      <input
-        type="text"
-        value={userName}
-        onChange={(event) => setUserName(event.target.value)}
-      ></input>
-      <label>Password: </label>
-      <input
-        type="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      ></input>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button onClick={() => sendLoginInfo()}>Login</button>
+      <form onSubmit={handleLoginForm}>
+        <label>Username: </label>
+        <input
+          type="text"
+          value={userName}
+          onChange={(event) => setUserName(event.target.value)}
+        ></input>
+        <label>Password: </label>
+        <input
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        ></input>
+        <button type="submit">Login</button>
+      </form>
     </div>
   );
 }
