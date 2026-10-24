@@ -4,6 +4,12 @@ export const verifyToken = (req, res, next) => {
     try {
         // GRAB TOKEN
         const authHeader = req.headers.authorization;
+
+        // HEADER CHECK
+        if(!authHeader || !authHeader.startsWith("Bearer ")) {
+            return resizeBy.status(401).json({message: "Access Denied."});
+        }
+        
         const token = authHeader.split(" ")[1];
 
         // VALIDATE TOKEN

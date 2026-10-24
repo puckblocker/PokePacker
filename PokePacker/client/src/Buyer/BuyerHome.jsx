@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function BuyerHome() {
   const [searchParams, setSearchParams] = useState("");
@@ -27,9 +26,9 @@ function BuyerHome() {
         <button type="submit">Search</button>
       </form>
       <Link to="/buyer/cart">
-    <button>See My Cart</button>
+        <button>See My Cart</button>
       </Link>
-    
+
       <Link to="/buyer/account">
         <button>Account Management</button>
       </Link>

@@ -10,7 +10,7 @@ function Login() {
   const [error, setError] = useState("");
 
   // LOGIN INFO BACKEND FRONTEND INTERACTION
-  async function handleLoginForm(evert) {
+  async function handleLoginForm(event) {
     event.preventDefault();
 
     // PACKAGE INFO
@@ -41,6 +41,8 @@ function Login() {
       if (response.ok) {
         localStorage.setItem("packer_token", data.token);
         localStorage.setItem("packer_type", data.type); // save account type
+        localStorage.setItem("packer_id", data.id);
+        localStorage.setItem("packer_status", data.status);
 
         console.log("Token Saved.");
 

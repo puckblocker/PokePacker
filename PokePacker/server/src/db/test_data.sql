@@ -19,16 +19,16 @@ VALUES
     ('mewtwoisbest',   '$2b$10$edjOMv9.nC4lh7Wiq.yIReDSs0fkdG.Cf.X4b/SuQ5PxpeieVhz2a', 'mewtwofan@example.com',    'banned',   'buyer' , '[null]' );
 
 INSERT INTO listing (seller_id, listing_name, quantity, condition, price, image, description, status)
-VALUES (2, 'Eevee - 116/128 (30th Celebration) (Cosmos)', 1, 'moderate',   2400, '/tests/img_src/eevee_1.jpg',   'SUPER DETAILED DESCRIPTION', 'active'),
-       (2, 'Psyduck - 226/217',                           1, 'moderate',   3585, '/tests/img_src/psyduck.jpg',   'SUPER DETAILED DESCRIPTION', 'active'),
-       (2, 'Bulbasaur - 133/132',                         1, 'moderate',   1563, '/tests/img_src/bulbasaur.jpg',   'SUPER DETAILED DESCRIPTION', 'pending'),
-       (3, 'Wigglypuff - 105/094',                        1, 'moderate',   470,  '/tests/img_src/wigglypuff.jpg', 'SUPER DETAILED DESCRIPTION', 'active'),
-       (3, 'Maushold - 146/128',                          1, 'mint',       1092, '/tests/img_src/maushold.jpg',   'SUPER DETAILED DESCRIPTION', 'removed'),
-       (3, 'Mega Kangaskhan ex - 104/132',                1, 'mint',       284,  '/tests/img_src/mega_kangaskhan.jpg', 'SUPER DETAILED DESCRIPTION', 'active'),
-       (3, 'Pikachu ex - 054/128',                        1, 'damaged',    124,  '/tests/img_src/pikachu_ex.jpg',       'SUPER DETAILED DESCRIPTION', 'active'),
-       (4, 'Kommo-o - 143/128',                           1, 'mint',       140,  '/tests/img_src/kommo.jpg',            'SUPER DETAILED DESCRIPTION', 'pending'),
-       (4, 'Jirachi ex - 102/128',                        1, 'mint',       48,   '/tests/img_src/jirachi.jpg',          'SUPER DETAILED DESCRIPTION', 'active'),
-       (4, 'Meowth ex - 062/088',                         1, 'damaged',    156,  '/tests/img_src/meowth_ex.jpg',        'SUPER DETAILED DESCRIPTION', 'removed');
+VALUES (2, 'Eevee - 116/128 (30th Celebration) (Cosmos)', 1, 'moderate',   2400, '/eevee_1.jpg',   'SUPER DETAILED DESCRIPTION', 'active'),
+       (2, 'Psyduck - 226/217',                           1, 'moderate',   3585, '/psyduck.jpg',   'SUPER DETAILED DESCRIPTION', 'active'),
+       (2, 'Bulbasaur - 133/132',                         1, 'moderate',   1563, '/bulbasaur.jpg',   'SUPER DETAILED DESCRIPTION', 'pending'),
+       (3, 'Wigglypuff - 105/094',                        1, 'moderate',   470,  '/wigglypuff.jpg', 'SUPER DETAILED DESCRIPTION', 'active'),
+       (3, 'Maushold - 146/128',                          1, 'mint',       1092, '/maushold.jpg',   'SUPER DETAILED DESCRIPTION', 'removed'),
+       (3, 'Mega Kangaskhan ex - 104/132',                1, 'mint',       284,  '/mega_kangaskhan.jpg', 'SUPER DETAILED DESCRIPTION', 'active'),
+       (3, 'Pikachu ex - 054/128',                        1, 'damaged',    124,  '/pikachu_ex.jpg',       'SUPER DETAILED DESCRIPTION', 'active'),
+       (4, 'Kommo-o - 143/128',                           1, 'mint',       140,  '/kommo.jpg',            'SUPER DETAILED DESCRIPTION', 'pending'),
+       (4, 'Jirachi ex - 102/128',                        1, 'mint',       48,   '/jirachi.jpg',          'SUPER DETAILED DESCRIPTION', 'active'),
+       (4, 'Meowth ex - 062/088',                         1, 'damaged',    156,  '/meowth_ex.jpg',        'SUPER DETAILED DESCRIPTION', 'removed');
     
 INSERT INTO cart (account_id, listing_id, quantity)
 VALUES  (7, 4, 1),

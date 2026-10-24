@@ -12,7 +12,7 @@ router.post(`/loginUser`, async (req, res) => {
   // CHECK USERNAME AGAINST DATABASE
   try {
     const result = await pool.query(
-      `SELECT status, password_hash, id, type FROM account WHERE username = $1`,  // $1 to combat sql injection
+      `SELECT status, password_hash, id, type, denial_reason FROM account WHERE username = $1`,  // $1 to combat sql injection
       [userName]
     );
 
@@ -27,6 +27,7 @@ router.post(`/loginUser`, async (req, res) => {
     const type = result.rows[0].type;
     const storedHash = result.rows[0].password_hash;
     const id = result.rows[0].id;
+    const status = result.rows[0].status;
     const validPassword = await bcrypt.compareSync(password, storedHash);
 
 
@@ -56,6 +57,7 @@ router.post(`/loginUser`, async (req, res) => {
     const token = jwt.sign({ 
         username: userName,
         id: id,
+        status: status,
         type: type},
         process.env.JWT_SECRET,
         {
@@ -68,7 +70,8 @@ router.post(`/loginUser`, async (req, res) => {
         message: `Successful Login.`,
         token: token,
         id: id,
-        type: type
+        type: type,
+        status: status
     });
   } 
   catch(error) 
