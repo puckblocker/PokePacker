@@ -22,7 +22,7 @@ function Login() {
     // SEND USER INFO TO BACKEND
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/loginUser`,
+        `${import.meta.env.VITE_API_URL}/loginUser`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

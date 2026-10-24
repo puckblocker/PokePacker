@@ -25,6 +25,13 @@ function BuyerHome() {
         />
         <button type="submit">Search</button>
       </form>
+      <Link to="/buyer/cart">
+    <button>See My Cart</button>
+      </Link>
+    
+      <Link to="/buyer/account">
+        <button>Account Management</button>
+      </Link>
     </div>
   );
 }

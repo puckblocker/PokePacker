@@ -29,6 +29,7 @@ router.post(`/loginUser`, async (req, res) => {
     const id = result.rows[0].id;
     const validPassword = await bcrypt.compareSync(password, storedHash);
 
+
     // REJECT LOGIN
     if(!validPassword)
     {
