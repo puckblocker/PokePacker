@@ -23,7 +23,7 @@ CREATE TABLE account (
 	email		  VARCHAR(254)		NOT NULL,
 	status        account_status    NOT NULL,
 	type          account_type		NOT NULL,
-	denial_reason	text
+	denial_reason text
 );
 
 CREATE TABLE listing (
