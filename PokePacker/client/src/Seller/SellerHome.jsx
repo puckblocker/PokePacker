@@ -139,7 +139,6 @@ useEffect(() => {
     <div>
 
       <h1> Welcome to PokéPacker! (Seller) </h1>
-      <Link to="/seller/listing">
           {/*MADISON CODE: SHOWS IF THE SELLER HAS REFUND REQUEST*/}
             <section>
                 <h2>Refund Requests</h2>
@@ -155,6 +154,8 @@ useEffect(() => {
                     ))
                 )}
             </section>
+  
+      <Link to="/seller/listing">
             <Link to="/seller/account">
               <button>Account Management</button>
             </Link>     
