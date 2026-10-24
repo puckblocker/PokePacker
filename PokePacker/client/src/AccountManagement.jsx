@@ -23,7 +23,7 @@ function AccountManagement() {
         setError('');
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/account/username`,
+                `${import.meta.env.VITE_API_URL}/api/account/username`,
                 {
                 method: 'PATCH',
                 headers: {
@@ -54,7 +54,7 @@ function AccountManagement() {
 
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/account/password`,
+                `${import.meta.env.VITE_API_URL}/api/account/password`,
                 {
                 method: 'PATCH',
                 headers: {
@@ -85,7 +85,7 @@ function AccountManagement() {
         setShowHistory(true);
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/account/purchase-history`,
+                `${import.meta.env.VITE_API_URL}/api/account/purchase-history`,
                 {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('packer_token')}`
@@ -107,7 +107,7 @@ function AccountManagement() {
         setHistoryError('');
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/account/refund-request`,
+                `${import.meta.env.VITE_API_URL}/api/account/refund-request`,
                 {
                 method: 'POST',
                 headers: {

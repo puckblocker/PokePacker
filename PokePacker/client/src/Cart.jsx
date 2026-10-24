@@ -13,7 +13,7 @@ function Cart() {
 const getCart = async () => {
     try {
         const response = await fetch(
-            `${import.meta.env.VITE_API_URL}/cart`,
+            `${import.meta.env.VITE_API_URL}/api/cart`,
             {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('packer_token')}`
