@@ -7,6 +7,13 @@ function BuyerHome() {
   return (
     <div>
       <h1> Welcome to PokéPacker! (Buyer) </h1>
+      <Link to="/buyer/cart">
+    <button>See My Cart</button>
+      </Link>
+    
+      <Link to="/buyer/account">
+        <button>Account Management</button>
+      </Link>
     </div>
   );
 }

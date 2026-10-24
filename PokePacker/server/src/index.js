@@ -8,9 +8,15 @@ import { verifyToken } from '../config/auth.js';
 import createUserHandler from './Visitor/createUser.js';
 import loginHandler from './Visitor/loginUser.js';
 import createListingHandler from "./seller/createListing.js";
-import showListingHandler from "./seller/showListings.js";
-import deleteListingHandler from "./seller/deleteListing.js";
+
+import showListingHandler from "./seller/showListings.js"
+import deleteListingHandler from "./seller/deleteListing.js"
 import editListingHandler from "./seller/editListing.js";
+
+import cartRouter from './Buyer/cart.js';
+import accountRouter from '../Account/account.js';
+
+
 
 const app = express();
 connectDB();
@@ -28,6 +34,8 @@ app.use('/api', loginHandler);
 app.use('/api', createListingHandler);
 app.use('/api', showListingHandler);
 app.use('/api', deleteListingHandler);
+app.use('/api', cartRouter);
+app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
 
 app.get('/api/verifyToken', verifyToken, (req, res) => {
