@@ -4,8 +4,8 @@
 2. Fill in your own database password
 3. Create Database `psql -U postgres`
 4. 'CREATE DATABASE pokepacker'
-5. Create the tables: `psql -h localhost -p 5432 -U postgres -d pokepacker -f server/schema.sql`
-6. Insert sample data: `psql -h localhost -p 5432 -U postgres -d pokepacker -f server/test_data.sql`
+5. Create the tables: `psql -h localhost -p 5432 -U postgres -d pokepacker -f server/src/db/schema.sql`
+6. Insert sample data: `psql -h localhost -p 5432 -U postgres -d pokepacker -f server/src/db/test_data.sql`
 7. `npm install` then `npm run dev`
 
 ## To run

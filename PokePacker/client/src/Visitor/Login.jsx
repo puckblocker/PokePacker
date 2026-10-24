@@ -84,6 +84,7 @@ function Login() {
           onChange={(event) => setPassword(event.target.value)}
         ></input>
         <button type="submit">Login</button>
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
     </div>
   );
