@@ -18,7 +18,7 @@ router.post('/createListing', verifyToken, uploadImage, async (req, res) => {
     const {listing_name, quantity, condition, price, description} = req.body; //Check user story for what data is needed to create a listing.
     let image = null;
 
-    const status = 'active';
+    const status = 'pending';
 
         try {
             if (req.file) image = await saveListingImage(req.file);
