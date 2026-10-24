@@ -35,7 +35,6 @@ function CreateListing() {
         if (imageFile) formData.append("image", imageFile); // must match upload.single("image") in config/upload.js
 
 
-
         try {
 
             const token = localStorage.getItem("packer_token");

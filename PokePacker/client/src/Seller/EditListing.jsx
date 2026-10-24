@@ -13,6 +13,8 @@ function EditListing({ listing, onClose, onSaved }) {
         image: listing.image ?? "",
         description: listing.description ?? ""
     });
+    const [imageFile, setImageFile] = useState(null);
+    const [error, setError] = useState("");
 
     function handleChange(event)
     {
@@ -23,6 +25,15 @@ function EditListing({ listing, onClose, onSaved }) {
     // SENDING LISTING TO SERVER
     async function saveListing(event) {
         event.preventDefault();
+
+        const body = new FormData();
+        body.append("listingId", listing.id);
+        body.append("listing_name", form.listing_name);
+        body.append("description", form.description);
+        body.append("quantity", Number(form.quantity));
+        body.append("condition", form.condition);
+        body.append("price", Number(form.price));
+        if (imageFile) body.append("image", imageFile);
         
         try {
 
@@ -33,16 +44,9 @@ function EditListing({ listing, onClose, onSaved }) {
                 {
                     method: "PUT",
                     headers: { 
-                        "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                      },
-                    body: JSON.stringify({
-                        ...form,
-                        quantity: Number(form.quantity),
-                        price: Number(form.price),
-                        image: form.image || null,
-                        listingId: listing.id,
-                    }),
+                     body: body,
                 },
             );
 
@@ -53,8 +57,9 @@ function EditListing({ listing, onClose, onSaved }) {
             onSaved(updated);
         }
         
-        catch(error) {
-            console.error("Error: ", error);
+        catch(err) {
+            console.error("Error: ", err);
+            setError("Couldn't save your changes. Please try again.");
         }
     }
     return (
@@ -112,7 +117,7 @@ function EditListing({ listing, onClose, onSaved }) {
                                 required
                                 >
                                     <option value="" disabled>Select Condition</option>
-                                    <option value="new">New</option>
+                                    <option value="mint">Mint</option>
                                     <option value="moderate">Moderate</option>
                                     <option value="damaged">Damaged</option>
 
@@ -127,6 +132,27 @@ function EditListing({ listing, onClose, onSaved }) {
                             onChange={handleChange}
                             required
                         />
+
+                        <label> Listing Image: </label>
+                        <input
+                            id="image"
+                            name="image"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            onChange={(event) => {
+                                setImageFile(event.target.files?.[0] ?? null);
+                            }}
+                        />
+                        {imageFile && (
+                            <p>Selected image: {imageFile.name}</p>
+                        )}
+
+                        {error && (
+                            <p role="alert" style={{ color: "red" }}>
+                                {error}
+                            </p>
+                        )}
+
                         <button type="submit">Save Changes</button>
                         <button type="button" onClick={onClose}>Cancel</button>
                     </form>
