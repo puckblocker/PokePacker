@@ -10,6 +10,7 @@ import loginHandler from './Visitor/loginUser.js';
 import createListingHandler from "./seller/createListing.js";
 import showListingHandler from "./seller/showListings.js"
 import deleteListingHandler from "./seller/deleteListing.js"
+import searchResults from "./buyer/getSearchResults.js";
 
 const app = express();
 connectDB();
@@ -27,6 +28,7 @@ app.use('/api', loginHandler);
 app.use('/api', createListingHandler);
 app.use('/api', showListingHandler);
 app.use('/api', deleteListingHandler);
+app.use('/api', searchResults);
 
 app.get('/api/verifyToken', verifyToken, (req, res) => {
   res.json({

@@ -12,7 +12,7 @@ function SearchResults() {
       // GRAB SEARCH RESULTS FROM BACKEND
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/search?q${query}`,
+          `${import.meta.env.VITE_API_URL}/api/search?q=${query}`,
         );
         const data = await response.json();
         setResults(data);
@@ -31,6 +31,15 @@ function SearchResults() {
     <div>
       <h1> Search Results! (Buyer) </h1>
       <h2> Results for: {query}</h2>
+      {results.map((item) => (
+        <li key={item.id}>
+          <button onClick={() => console.log("Button Click")}>
+            <strong>
+              {item.listing_name} - ${item.price}
+            </strong>
+          </button>
+        </li>
+      ))}
     </div>
   );
 }
