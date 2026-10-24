@@ -55,7 +55,7 @@ CREATE TABLE cart (
 CREATE TABLE orders (
     id      SERIAL PRIMARY KEY,
     account_id      INTEGER    NOT NULL     REFERENCES account(id),
-	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status      order_status   NOT NULL
 );
 
