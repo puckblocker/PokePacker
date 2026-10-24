@@ -112,7 +112,7 @@ function EditListing({ listing, onClose, onSaved }) {
                                 required
                                 >
                                     <option value="" disabled>Select Condition</option>
-                                    <option value="new">New</option>
+                                    <option value="mint">Mint</option>
                                     <option value="moderate">Moderate</option>
                                     <option value="damaged">Damaged</option>
 
