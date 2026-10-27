@@ -1,6 +1,8 @@
 import express from "express";
 import {pool} from "../../config/db.js";
 import { verifyToken } from "../../config/auth.js";
+import { uploadImage } from "../../config/upload.js";
+import { saveListingImage } from "../../config/storage.js";
 
 const router = express.Router();
 
@@ -36,7 +38,7 @@ router.get('/editListing', verifyToken, async (req, res) => {
         res.status(201).json({ message: 'Listing fetched successfully' });
 });
 
-router.put('/editListing', verifyToken, async (req, res) => {
+router.put('/editListing', verifyToken, uploadImage, async (req, res) => {
     if (!req.user || req.user.type !== "seller")
     {
         res.status(403).json({ error: "Sellers Only"}); // CHECK ERROR MESSAGE REQUIREMENTS
@@ -46,20 +48,25 @@ router.put('/editListing', verifyToken, async (req, res) => {
     const status = 'pending';
 
     try {
-            const result = await pool.query(
-                `UPDATE listing
-                SET listing_name = $1,
-                    quantity = $2, 
-                    condition = $3, 
-                    price = $4, 
-                    image = $5, 
-                    description = $6, 
-                    status = $7
-                WHERE id = $8 AND seller_id = $9 And status != 'removed' RETURNING *`,
-                //(listing_name, quantity, condition, price, image, description, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-                [listing_name, quantity, condition, price, image, description, status, listingId, req.user.id]
-            );
-            res.status(200).json(result.rows[0]);
+        // Only save a new image if one was uploaded
+        let image = null;
+        if (req.file) {
+            image = await saveListingImage(req.file);
+        }
+        const result = await pool.query(
+            `UPDATE listing
+            SET listing_name = $1,
+                quantity = $2, 
+                condition = $3, 
+                price = $4, 
+                image = COALESCE($5, image), 
+                description = $6, 
+                status = $7
+            WHERE id = $8 AND seller_id = $9 And status != 'removed' RETURNING *`,
+            //(listing_name, quantity, condition, price, image, description, status) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [listing_name, quantity, condition, price, image, description, status, listingId, req.user.id]
+        );
+        res.status(200).json(result.rows[0]);
         }
         catch(error)
         {
