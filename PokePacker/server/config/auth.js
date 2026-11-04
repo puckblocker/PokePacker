@@ -7,7 +7,7 @@ export const verifyToken = (req, res, next) => {
 
         // HEADER CHECK
         if(!authHeader || !authHeader.startsWith("Bearer ")) {
-            return resizeBy.status(401).json({message: "Access Denied."});
+            return res.status(401).json({message: "Access Denied."});
         }
         
         const token = authHeader.split(" ")[1];
@@ -22,5 +22,16 @@ export const verifyToken = (req, res, next) => {
     } catch(error)
     {
         return res.status(403).json({message: "Invalid token."});
+    }
+}
+
+export const verifyRole = (allowedRole) => {
+    return (req, res, next) => {
+        if(req.user && req.user.type === allowedRole){
+            next();
+        }
+        else{
+            return res.status(403).json({ message: "Missing Authorization." });
+        }
     }
 }

@@ -5,6 +5,7 @@ import { connectDB } from '../config/db.js';
 import adminRouter from './admin/admin.js'
 
 import { verifyToken } from '../config/auth.js';
+import { verifyRole } from '../config/auth.js';
 import createUserHandler from './Visitor/createUser.js';
 import loginHandler from './Visitor/loginUser.js';
 import createListingHandler from "./seller/createListing.js";
@@ -41,10 +42,10 @@ app.use('/api', showListingHandler);
 app.use('/api', deleteListingHandler);
 app.use('/api', searchResults);
 app.use('/api', itemDetails)
-app.use('/api', cartRouter);
+app.use('/api', verifyToken, verifyRole('buyer'), cartRouter);
 app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
-app.use('/api', addToCart);
+app.use('/api', verifyToken, verifyRole('buyer'), addToCart);
 
 
 app.use(MEDIA_URL, express.static(MEDIA_ROOT));

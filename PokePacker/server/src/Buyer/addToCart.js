@@ -1,11 +1,10 @@
 import express from 'express';
 import { pool } from '../../config/db.js';
-import {verifyToken } from '../../config/auth.js';
 
 const router = express.Router();
 
 // CREATE USER POST ROUTE
-router.post(`/addToCart`, verifyToken, async (req, res) => {
+router.post(`/addToCart`, async (req, res) => {
   const {itemID, quantity} = req.body;
   const accountID = req.user.id;
 

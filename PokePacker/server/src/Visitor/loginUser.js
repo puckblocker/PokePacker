@@ -61,7 +61,7 @@ router.post(`/loginUser`, async (req, res) => {
         type: type},
         process.env.JWT_SECRET,
         {
-            expiresIn: "2 minutes",
+            expiresIn: "30 minutes",
             algorithm: 'HS256'
         });
 

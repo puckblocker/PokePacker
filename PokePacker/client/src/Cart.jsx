@@ -1,11 +1,58 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+
+// HELPER FUNCTION FOR FORM INPUT
+function FormInput({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  required = false,
+  ...rest
+}) {
+  return (
+    <>
+      <label>{label}: </label>
+      <input
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        required={required}
+        {...rest}
+      />
+    </>
+  );
+}
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+  const [showCheckout, setShowCheckout] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // CHECKOUT DATA
+  const [formData, setFormData] = useState({
+    name: "",
+    num: "",
+    expMonth: "",
+    expYear: "",
+    code: "",
+    country: "",
+    address: "",
+    apartment: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  });
 
   useEffect(() => {
     getCart();
@@ -93,48 +140,44 @@ function Cart() {
     }
   };
 
-  const checkout = async () => {
-    navigate("/buyer/checkout");
+  const checkout = async (event) => {
+    event.preventDefault();
+    setError("");
+    setMessage("");
 
-    // setError('');
-    // setMessage('');
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/checkout`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("packer_token")}`,
+          },
+        },
+      );
 
-    // try {
-    //     const response = await fetch(
-    //         `${import.meta.env.VITE_API_URL}/checkout`,
-    //         {
-    //             method: 'POST',
-    //             headers: {
-    //                 Authorization: `Bearer ${localStorage.getItem('packer_token')}`
-    //             }
-    //         }
-    //     );
+      const data = await response.json();
 
-    //     const data = await response.json();
+      if (!response.ok) {
+        setError(data.message || "Checkout failed.");
+        return;
+      }
 
-    //     if (!response.ok) {
-    //         setError(data.message || 'Checkout failed.');
-    //         return;
-    //     }
+      setMessage(data.message);
 
-    //     setMessage(data.message);
+      //FETCHES CART AGAIN (IT WILL BE EMPTY AFTER CHECKOUT)
+      const cartResponse = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("packer_token")}`,
+        },
+      });
 
-    //     //FETCHES CART AGAIN (IT WILL BE EMPTY AFTER CHECKOUT)
-    //     const cartResponse = await fetch(
-    //         `${import.meta.env.VITE_API_URL}/cart`,
-    //         {
-    //             headers: {
-    //                 Authorization: `Bearer ${localStorage.getItem('packer_token')}`
-    //             }
-    //         }
-    //     );
-
-    //     if (cartResponse.ok) {
-    //         setCartItems(await cartResponse.json());
-    //     }
-    // } catch {
-    //     setError('Could not connect to the server.');
-    // }
+      if (cartResponse.ok) {
+        setCartItems(await cartResponse.json());
+      }
+    } catch {
+      setError("Could not connect to the server.");
+    }
   };
 
   //CALCULATES TOTAL PRICE
@@ -236,9 +279,112 @@ function Cart() {
       <h2 style={{ textAlign: "right", marginTop: "24px" }}>
         Cart Total: ${total.toFixed(2)}
       </h2>
-      <button onClick={checkout} disabled={cartItems.length === 0}>
-        Checkout
+      <button onClick={() => setShowCheckout(!showCheckout)}>
+        {showCheckout ? "Close Checkout" : "Proceed To Checkout"}
       </button>
+      {showCheckout && (
+        <form onSubmit={checkout}>
+          <h2>Card Information</h2>
+          <FormInput
+            label="*Name on Card"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*Card Number"
+            name="num"
+            type="tel"
+            maxLength="16"
+            minLength="16"
+            value={formData.num}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*Expiration Month"
+            name="expMonth"
+            type="tel"
+            maxLength="2"
+            minLength="2"
+            placeholder="MM"
+            value={formData.expMonth}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*Expiration Year"
+            name="expYear"
+            type="tel"
+            maxLength="2"
+            minLength="2"
+            placeholder="YY"
+            value={formData.expYear}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*Security Code"
+            name="code"
+            type="tel"
+            maxLength="3"
+            minLength="3"
+            value={formData.code}
+            onChange={handleChange}
+            required
+          />
+          <h2> Shipping Information </h2>
+          <FormInput
+            label="*Country"
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="Address"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="Apartment"
+            name="apartment"
+            value={formData.apartment}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*City"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*State"
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+            required
+          />
+          <FormInput
+            label="*Zip Code / Postal Code"
+            name="zipCode"
+            type="tel"
+            maxLength="5"
+            minLength="5"
+            value={formData.zipCode}
+            onChange={handleChange}
+            required
+          />
+          <button onClick={checkout} disabled={cartItems.length === 0}>
+            Checkout
+          </button>
+        </form>
+      )}
     </div>
   );
 }
