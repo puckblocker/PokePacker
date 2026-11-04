@@ -76,12 +76,14 @@ function Login() {
           type="text"
           value={userName}
           onChange={(event) => setUserName(event.target.value)}
+          required
         ></input>
         <label>Password: </label>
         <input
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          required
         ></input>
         <button type="submit">Login</button>
         {error && <p style={{ color: "red" }}>{error}</p>}

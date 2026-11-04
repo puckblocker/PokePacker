@@ -44,18 +44,21 @@ function CreateAccount() {
           type="text"
           value={userName}
           onChange={(event) => setUserName(event.target.value)}
+          required
         />
         <label>Email: </label>
         <input
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          required
         />
         <label>Password: </label>
         <input
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
+          required
         />
         <button type="submit">Create Account</button>
       </form>

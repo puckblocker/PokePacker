@@ -9,8 +9,9 @@ import AdminHome from "./Admin/AdminHome.jsx";
 import CreateListing from "./Seller/CreateListing.jsx";
 import SearchResults from "./Buyer/SearchResults.jsx";
 import ShowItem from "./Buyer/ItemDetails.jsx";
-import Cart from './Cart';
-import AccountManagement from './AccountManagement';
+import Checkout from "./Buyer/CheckOut.jsx";
+import Cart from "./Cart";
+import AccountManagement from "./AccountManagement";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/buyer/cart" element={<Cart />} />
           <Route path="/buyer/account" element={<AccountManagement />} />
+          <Route path="/buyer/checkout" element={<Checkout />} />
           <Route path="/seller/account" element={<AccountManagement />} />
         </Routes>
       </BrowserRouter>
