@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS orders, cart, item_review, listing, account CASCADE;
-DROP TYPE IF EXISTS order_status, account_status, account_type, condition, listing_status;
+DROP TYPE IF EXISTS order_status, account_status, account_type, condition, listing_status, review_status;
 
 CREATE TYPE order_status AS ENUM
   ('pending', 'paid', 'shipped', 'delivered', 'cancelled');
@@ -15,6 +15,9 @@ CREATE TYPE condition AS ENUM
 
 CREATE TYPE listing_status AS ENUM
   ('active', 'pending', 'removed');
+  
+CREATE TYPE review_status AS ENUM
+  ('active', 'removed');
 
 CREATE TABLE account (
     id            SERIAL PRIMARY KEY,
@@ -42,7 +45,9 @@ CREATE TABLE item_review (
 	id 	            SERIAL  PRIMARY KEY,
     listing_id      INTEGER         NOT NULL    REFERENCES listing(id),
     reviewer_id     INTEGER         NOT NULL    REFERENCES account(id),
-	description		VARCHAR(300) 	NOT NULL
+	description		VARCHAR(300) 	NOT NULL,
+    status       review_status  NOT NULL,
+    rating          INTEGER         NOT NULL CHECK (rating >= 1 AND rating <= 5)
 );
 
 CREATE TABLE cart (

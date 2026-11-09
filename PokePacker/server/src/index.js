@@ -20,6 +20,9 @@ import editListingHandler from "./seller/editListing.js";
 import cartRouter from './Buyer/cart.js';
 import accountRouter from '../Account/account.js';
 
+import createReviewHandler from './Buyer/createReview.js';
+import showReviewsHandler from './Buyer/showReviews.js';
+
 
 
 import { MEDIA_URL, MEDIA_ROOT } from '../config/config.js';
@@ -41,11 +44,15 @@ app.use('/api', createListingHandler);
 app.use('/api', showListingHandler);
 app.use('/api', deleteListingHandler);
 app.use('/api', searchResults);
-app.use('/api', itemDetails)
-app.use('/api', verifyToken, verifyRole('buyer'), cartRouter);
+app.use('/api', itemDetails);
+app.use('/api', showReviewsHandler);
 app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
+app.use('/api', createReviewHandler);
+
 app.use('/api', verifyToken, verifyRole('buyer'), addToCart);
+app.use('/api', verifyToken, verifyRole('buyer'), cartRouter);
+
 
 
 app.use(MEDIA_URL, express.static(MEDIA_ROOT));

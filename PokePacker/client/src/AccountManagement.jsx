@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import CreateReview from './Buyer/CreateReview.jsx';
+
 
 const cellStyle = {
     border: '1px solid #ccc',
@@ -15,6 +17,7 @@ function AccountManagement() {
     const [purchaseHistory, setPurchaseHistory] = useState([]);
     const [historyError, setHistoryError] = useState('');
     const [showHistory, setShowHistory] = useState(false);
+    const [reviewing, setReviewing] = useState(null);
 
     //SENDS THE NEW USERNAME TO BACKEND AND UPDATES THE DATABASE
     const handleUsernameChange = async (event) => {
@@ -232,6 +235,15 @@ function AccountManagement() {
                                         >
                                             Request Refund
                                         </button>
+                                        <button 
+                                            type="button" 
+                                            onClick={() => 
+                                                setReviewing(item.listingId)
+                                            }
+                                        >
+                                            Leave Review
+                                        </button>
+
                                     </td>
                                 </tr>
                             ))}
@@ -249,6 +261,16 @@ function AccountManagement() {
     </div>
 )}
 </section>
+{reviewing !== null && (
+    <CreateReview 
+        listingId={reviewing}
+        onClose={() => setReviewing(null)}
+        onSaved={(updated) => {
+            setMessage('Review submitted successfully.');
+            setReviewing(null);
+        }}
+    />
+)}
 </div>
 );
 }

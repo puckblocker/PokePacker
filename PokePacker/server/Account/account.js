@@ -119,7 +119,8 @@ router.get('/account/purchase-history', verifyToken, async (req, res) => {
                 order_items.id AS order_item_id,
                 order_items.listing_name,
                 order_items.quantity,
-                order_items.price
+                order_items.price,
+                order_items.listing_id
              FROM orders
              JOIN order_items ON order_items.order_id = orders.id
              WHERE orders.account_id = $1
@@ -145,7 +146,8 @@ router.get('/account/purchase-history', verifyToken, async (req, res) => {
                 orderItemId: item.order_item_id,
                 listingName: item.listing_name,
                 quantity: item.quantity,
-                price: item.price
+                price: item.price,
+                listingId: item.listing_id
             });
             //ADD EACH ITEMS SUBTOTAL TO ORDER TOTAL
             orders[item.order_id].total +=

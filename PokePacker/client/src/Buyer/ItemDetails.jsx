@@ -6,6 +6,7 @@ function ItemDetails() {
   const [item, setItem] = useState(null);
   const [itemAmount, setItemAmount] = useState(1);
   const [message, setMessage] = useState("");
+  const [reviews, setReviews] = useState([]);
 
   // CALL WHEN PAGE LOADS
   useEffect(() => {
@@ -24,6 +25,25 @@ function ItemDetails() {
 
     if (id) {
       getItem();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    async function getReviews() {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/showReviews/${id}`,
+        );
+
+        setReviews(await response.json());
+
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    }
+
+    if (id) {
+      getReviews();
     }
   }, [id]);
 
@@ -105,6 +125,20 @@ function ItemDetails() {
       ></input>
       {message}
       <button onClick={() => handleAddToCart(item.id)}>Add To Cart</button>
+
+      <h2>Reviews</h2>
+      {reviews.length > 0 ? (
+        <ul>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <strong>Rating:</strong> {review.rating} <br />
+              <strong>Description:</strong> {review.description}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No reviews yet.</p>
+      )}
     </div>
   );
 }

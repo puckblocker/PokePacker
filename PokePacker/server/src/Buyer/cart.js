@@ -192,7 +192,7 @@ router.post('/checkout', async (req, res) => {
         }
 
         // CHECK AVAILABLE STOCK
-        for (const item of cartResults.rows)
+        for (const item of cartResult.rows)
         {
             if(item.cart_quantity > item.available_stock) {
                 await client.query('ROLLBACK')
