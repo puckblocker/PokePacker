@@ -1,0 +1,15 @@
+{
+  "name": "pokepacker",
+  "version": "1.0.0",
+  "description": "1. Copy `server/.env.example` to `server/.env`\r 2. Fill in your own database password\r 3. Create Database `psql -U postgres`\r 4. 'CREATE DATABASE pokepacker'\r 5. Create the tables: `psql -h localhost -p 5432 -U postgres -d pokepacker -f server/src/db/schema.sql`\r 6. Insert sample data: `psql -h localhost -p 5432 -U postgres -d pokepacker -f server/src/db/test_data.sql`\r 7. `npm install` then `npm run dev`",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@types/node": "^26.6.6"
+  }
+}
