@@ -2,6 +2,8 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { connectDB } from '../config/db.js';
+import { Server } from 'socket.io';
+import http from 'http';
 import adminRouter from './admin/admin.js'
 
 import { verifyToken } from '../config/auth.js';
@@ -35,10 +37,17 @@ import { MEDIA_URL, MEDIA_ROOT } from '../config/config.js';
 import marketplaceRouter from "./Buyer/marketplace.js";
 
 const app = express();
+const server = http.createServer(app);
 connectDB();
 const PORT = process.env.PORT || 5000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
 
+// WEB SOCKET SERVER & FRONTEND CONNECTION
+const io = new Server(server, {
+  cors: { origin: CLIENT_ORIGIN }
+});
+
+app.set('io', io);
 
 app.use(cors({ origin: CLIENT_ORIGIN }));
 app.use(express.json());
@@ -86,6 +95,6 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Auth demo server listening on http://localhost:${PORT}`);
 });
