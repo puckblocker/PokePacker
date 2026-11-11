@@ -28,8 +28,11 @@ import createTicketHandler from './createTicket.js';
 import showTicketHandler from './admin/showTickets.js'
 import closeTicketHandler from './admin/closeTickets.js'
 
+import sellerRequestRouter from './Buyer/sellerRequest.js';
 
 import { MEDIA_URL, MEDIA_ROOT } from '../config/config.js';
+
+import marketplaceRouter from "./Buyer/marketplace.js";
 
 const app = express();
 connectDB();
@@ -62,6 +65,8 @@ app.use('/api', showTicketHandler);
 app.use('/api', verifyToken, verifyRole('buyer'), addToCart);
 app.use('/api', verifyToken, verifyRole('buyer'), cartRouter);
 
+app.use('/api', sellerRequestRouter);
+app.use('/api', marketplaceRouter);
 
 
 app.use(MEDIA_URL, express.static(MEDIA_ROOT));

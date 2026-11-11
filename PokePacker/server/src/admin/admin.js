@@ -1,7 +1,10 @@
 import express from 'express';
 import {pool} from '../../config/db.js';
+import { verifyToken, verifyRole } from '../../config/auth.js';
+
 
 const router = express.Router();
+router.use(verifyToken, verifyRole('admin'));
 
 //GETS ALL USERS THAT ARE PENDING FOR ADMIN TO ACCEPT OR DENY
 router.get('/pending-users', async(req,res) => {
@@ -135,6 +138,118 @@ router.patch('/reject-listing/:id', async (req, res) => {
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Could not reject listing' });
+    }
+});
+
+// LOAD SELLER APPLICATIONS WAITING FOR ADMIN REVIEW
+router.get('/pending-seller-requests', async (req, res) => {
+    try {
+        const result = await pool.query(
+            `SELECT sr.id, sr.account_id, sr.status, sr.created_at,
+                    a.username, a.email
+             FROM seller_requests sr
+             JOIN account a ON sr.account_id = a.id
+             WHERE sr.status = 'pending'
+             ORDER BY sr.created_at ASC`
+        );
+
+        return res.status(200).json(result.rows);
+    } catch (error) {
+        console.error('Error loading seller applications:', error);
+        return res.status(500).json({
+            message: 'Could not load seller applications.'
+        });
+    }
+});
+
+// APPROVE A SELLER APPLICATION
+router.patch('/approve-seller/:id', async (req, res) => {
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN');
+
+        const request = await client.query(
+            `SELECT account_id
+             FROM seller_requests
+             WHERE id = $1 AND status = 'pending'
+             FOR UPDATE`,
+            [req.params.id]
+        );
+
+        if (request.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({
+                message: 'Pending seller application not found.'
+            });
+        }
+
+        //HANDLES CHANGING A BUYERS ACCOUNT TYPE TO SELLER
+        const account = await client.query(
+            `UPDATE account
+             SET type = 'seller'
+             WHERE id = $1 AND type = 'buyer' AND status = 'approved'
+             RETURNING id`,
+            [request.rows[0].account_id]
+        );
+
+        if (account.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(409).json({
+                message: 'This account can no longer be converted to a seller.'
+            });
+        }
+
+        await client.query(
+            `UPDATE seller_requests
+             SET status = 'approved', reviewed_at = CURRENT_TIMESTAMP
+             WHERE id = $1`,
+            [req.params.id]
+        );
+
+        await client.query('COMMIT');
+
+        return res.status(200).json({
+            message: 'Seller application approved. The user must log in again.'
+        });
+
+    } catch (error) {
+        await client.query('ROLLBACK');
+        console.error('Error approving seller application:', error);
+        return res.status(500).json({
+            message: 'Could not approve seller application.'
+        });
+    } finally {
+        client.release();
+    }
+});
+
+// REJECTS A SELLER APPLICATION
+router.patch('/reject-seller/:id', async (req, res) => {
+    try {
+        const result = await pool.query(
+            `UPDATE seller_requests
+             SET status = 'denied', reviewed_at = CURRENT_TIMESTAMP
+             WHERE id = $1 AND status = 'pending'
+             RETURNING id`,
+            [req.params.id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                message: 'Pending seller application not found.'
+            });
+        }
+
+        return res.status(200).json({
+            message: 'Seller application rejected.'
+        });
+
+    } catch (error) {
+        console.error('Error rejecting seller application:', error);
+        return res.status(500).json({
+            message: 'Could not reject seller application.'
+        });
     }
 });
 
