@@ -38,6 +38,8 @@ Meeting Minutes:
   -Discussed how far along everyone is and what is completed/still needs to be completed
   -Decided next meeting times
   -Everyone was present
+10/22/2026 3:15-4:00
+  -General Meeting to assign remaining tasks
 11/7/2026 7:40-8:40
   -Discussed progress on sprint 4
   -Determined which parts still need to be completed and determine who shall finish what
