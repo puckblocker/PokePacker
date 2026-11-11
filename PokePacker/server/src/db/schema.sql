@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS orders, cart, item_review, listing, account CASCADE;
-DROP TYPE IF EXISTS order_status, account_status, account_type, condition, listing_status, review_status;
+DROP TYPE IF EXISTS order_status, account_status, account_type, condition, listing_status, review_status, ticket_status;
 
 CREATE TYPE order_status AS ENUM
   ('pending', 'paid', 'shipped', 'delivered', 'cancelled');
@@ -18,6 +18,9 @@ CREATE TYPE listing_status AS ENUM
   
 CREATE TYPE review_status AS ENUM
   ('active', 'removed');
+
+CREATE TYPE ticket_status AS ENUM
+  ('open', 'closed');
 
 CREATE TABLE account (
     id            SERIAL PRIMARY KEY,
@@ -79,5 +82,14 @@ CREATE TABLE refund_requests (
     buyer_id     INTEGER NOT NULL REFERENCES account(id),
     seller_id    INTEGER NOT NULL REFERENCES account(id),
     status       VARCHAR(20) NOT NULL DEFAULT 'pending',
+    created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE support_tickets (
+    id           SERIAL PRIMARY KEY,
+    account_id   INTEGER NOT NULL REFERENCES account(id),
+    subject      VARCHAR(100) NOT NULL,
+    description  VARCHAR(300) NOT NULL,
+    status       ticket_status NOT NULL,
     created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

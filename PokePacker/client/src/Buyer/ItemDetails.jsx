@@ -95,6 +95,36 @@ function ItemDetails() {
       console.error("Error: ", error);
     }
   }
+    async function deleteReview(reviewId) {
+      const token = localStorage.getItem("packer_token");
+
+      if (!window.confirm("Are you sure you want to remove this review?")) {
+      return;
+    }
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/deleteReview`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ reviewId }),
+          },
+        );
+        if (!response.ok) {
+          throw new Error("Failed to delete review");
+        }
+        // Remove the deleted review from the state
+        setReviews((prevReviews) =>
+          prevReviews.filter((review) => review.id !== reviewId),
+        );
+      }
+      catch (error) {
+        console.error("Error: ", error);
+      }
+    }
 
   return (
     <div>
@@ -131,8 +161,13 @@ function ItemDetails() {
         <ul>
           {reviews.map((review) => (
             <li key={review.id}>
+              <strong>Reviewer:</strong> <strong>{review.username}</strong> <br />
               <strong>Rating:</strong> {review.rating} <br />
-              <strong>Description:</strong> {review.description}
+              <strong>Description:</strong> {review.description} <br />
+              {localStorage.getItem("packer_token") && (
+                <button onClick={() => deleteReview(review.id)}>Delete</button>
+              )}
+
             </li>
           ))}
         </ul>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function AdminHome() {
   const [pendingUsers, setPendingUsers] = useState([]);
@@ -148,6 +149,10 @@ async function handleListingDecision(listingId, decision){
   return (
     <div>
       <h1> Welcome to PokéPacker! (Admin) </h1>
+
+      <Link to="/admin/support-tickets">
+        <button>View Support Tickets</button>
+      </Link>
 
       <h2>Accounts Awaiting Approval..</h2>
       {error && <p>{error}</p>}
