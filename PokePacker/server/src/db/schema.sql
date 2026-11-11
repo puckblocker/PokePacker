@@ -93,3 +93,11 @@ CREATE TABLE support_tickets (
     status       ticket_status NOT NULL,
     created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE seller_requests (
+    id          SERIAL PRIMARY KEY,
+    account_id  INTEGER NOT NULL REFERENCES account(id),
+    status      VARCHAR(20) NOT NULL DEFAULT 'pending',
+    created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    reviewed_at TIMESTAMP
+);
