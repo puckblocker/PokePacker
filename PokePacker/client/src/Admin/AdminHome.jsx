@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import LogoutButton from "../LogoutButton.jsx";
 
 function AdminHome() {
@@ -202,6 +203,11 @@ function getAuthHeaders() {
       {/* ACCOUNTS AWAITING APPROVAL */}
       <h2>Buyer Accounts Awaiting Approval</h2>
 
+      <Link to="/admin/support-tickets">
+        <button>View Support Tickets</button>
+      </Link>
+
+      <h2>Accounts Awaiting Approval..</h2>
       {error && <p>{error}</p>}
       {message && <p>{message}</p>}
 

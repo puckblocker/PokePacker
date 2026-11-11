@@ -22,6 +22,11 @@ import accountRouter from '../Account/account.js';
 
 import createReviewHandler from './Buyer/createReview.js';
 import showReviewsHandler from './Buyer/showReviews.js';
+import deleteReviewHandler from './Buyer/deleteReview.js';
+
+import createTicketHandler from './createTicket.js';
+import showTicketHandler from './admin/showTickets.js'
+import closeTicketHandler from './admin/closeTickets.js'
 
 import sellerRequestRouter from './Buyer/sellerRequest.js';
 
@@ -51,6 +56,11 @@ app.use('/api', showReviewsHandler);
 app.use('/api', accountRouter);
 app.use('/api', editListingHandler);
 app.use('/api', createReviewHandler);
+app.use('/api', deleteReviewHandler);
+
+app.use('/api', createTicketHandler);
+app.use('/api', closeTicketHandler);
+app.use('/api', showTicketHandler);
 
 app.use('/api', verifyToken, verifyRole('buyer'), addToCart);
 app.use('/api', verifyToken, verifyRole('buyer'), cartRouter);
