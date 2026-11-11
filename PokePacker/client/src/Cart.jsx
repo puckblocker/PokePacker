@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // HELPER FUNCTION FOR FORM INPUT
 function FormInput({
@@ -84,7 +85,7 @@ function Cart() {
   const updateQuantity = async (listingId, quantity) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/cart/${listingId}`,
+        `${import.meta.env.VITE_API_URL}api/cart/${listingId}`,
         {
           method: "PATCH",
           headers: {
@@ -115,7 +116,7 @@ function Cart() {
   const removeItem = async (listingId) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/cart/${listingId}`,
+        `${import.meta.env.VITE_API_URL}/api/cart/${listingId}`,
         {
           method: "DELETE",
           headers: {
@@ -166,7 +167,7 @@ function Cart() {
       setMessage(data.message);
 
       //FETCHES CART AGAIN (IT WILL BE EMPTY AFTER CHECKOUT)
-      const cartResponse = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
+      const cartResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/cart`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("packer_token")}`,
         },
@@ -189,6 +190,9 @@ function Cart() {
   //UI
   return (
     <div style={{ padding: "24px", maxWidth: "1100px", margin: "0 auto" }}>
+      <Link to="/buyer/home">
+        <button>Back to Homepage</button>
+      </Link>
       <h1>My Cart</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {message && <p style={{ color: "green" }}>{message}</p>}

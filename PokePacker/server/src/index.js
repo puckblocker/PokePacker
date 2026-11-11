@@ -23,9 +23,11 @@ import accountRouter from '../Account/account.js';
 import createReviewHandler from './Buyer/createReview.js';
 import showReviewsHandler from './Buyer/showReviews.js';
 
-
+import sellerRequestRouter from './Buyer/sellerRequest.js';
 
 import { MEDIA_URL, MEDIA_ROOT } from '../config/config.js';
+
+import marketplaceRouter from "./Buyer/marketplace.js";
 
 const app = express();
 connectDB();
@@ -53,6 +55,8 @@ app.use('/api', createReviewHandler);
 app.use('/api', verifyToken, verifyRole('buyer'), addToCart);
 app.use('/api', verifyToken, verifyRole('buyer'), cartRouter);
 
+app.use('/api', sellerRequestRouter);
+app.use('/api', marketplaceRouter);
 
 
 app.use(MEDIA_URL, express.static(MEDIA_ROOT));
