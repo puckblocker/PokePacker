@@ -192,7 +192,7 @@ router.post('/checkout', async (req, res) => {
         }
 
         // CHECK AVAILABLE STOCK
-        for (const item of cartResults.rows)
+        for (const item of cartResult.rows)
         {
             if(item.cart_quantity > item.available_stock) {
                 await client.query('ROLLBACK')
@@ -237,6 +237,20 @@ router.post('/checkout', async (req, res) => {
         );
 
         await client.query('COMMIT');
+
+        // WEB SOCKET
+        const io = req.app.get('io');
+
+        const deliveryInfo = {
+            orderID: order.id,
+            shippingInfo: req.body,
+            message: 'New order ready for delivery'
+        };
+        
+        // SEND SHIPPING INFO OVER WEB SOCKET
+        io.emit('new_oder_place', deliverInfo);
+
+        console.log("New order shipping info: ", deliveryInfo);
 
         res.status(201).json({
             message: 'Checkout successful! Your order can be viewed in purchase history.',
