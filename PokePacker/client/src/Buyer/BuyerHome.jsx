@@ -129,7 +129,6 @@ function BuyerHome() {
         <button>Account Management</button>
       </Link>
 
-      <h2>Marketplace</h2>
           <h2 style={{ marginTop: "24px" }}>Marketplace</h2>
 
           {cartMessage && (
