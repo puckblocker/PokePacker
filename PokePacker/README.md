@@ -42,3 +42,8 @@ npm run dev
 | iluvpikachu | Testpikachu! | buyer |
 | eeveeiscute| Testeevee! | buyer (pending)|
 | mewtwoisbest | Testmewtoo! | buyer (banned)|
+
+## How to Run Test Files
+1. Nagivate to client folder
+2. Run command `npx vitest run` to run all test files
+3. Run command `npx vitest run [name of test file]` to run specifc test files
