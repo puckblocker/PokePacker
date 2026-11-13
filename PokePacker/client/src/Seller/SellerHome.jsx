@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EditListing from "./EditListing";
+import LogoutButton from "../LogoutButton.jsx";
 
 function SellerHome() {
 
@@ -107,6 +108,7 @@ useEffect(() => {
     if (listings.length === 0) {
       return (
         <div>
+           <LogoutButton />
           <h1> Welcome to PokéPacker! (Seller) </h1>
           <p>You have no listings yet.</p>
           {/*MADISON CODE: SHOWS IF THE SELLER HAS REFUND REQUEST*/}
@@ -137,7 +139,7 @@ useEffect(() => {
 
     return (
     <div>
-
+      <LogoutButton />
       <h1> Welcome to PokéPacker! (Seller) </h1>
           {/*MADISON CODE: SHOWS IF THE SELLER HAS REFUND REQUEST*/}
             <section>

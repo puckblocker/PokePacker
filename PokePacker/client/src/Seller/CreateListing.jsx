@@ -81,6 +81,9 @@ function CreateListing() {
 
     return (
         <div>
+            <Link to="/seller/home">
+                <button>Back to Homepage</button>
+            </Link>
             <h1> Create a Listing! </h1>
             {/* CREATE LISTING INFO */}
             <form onSubmit={sendListing}>

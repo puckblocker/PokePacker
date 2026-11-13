@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import CreateReview from './Buyer/CreateReview.jsx';
+import {useNavigate, Link } from "react-router-dom";
+
 
 const cellStyle = {
     border: '1px solid #ccc',
@@ -7,6 +10,7 @@ const cellStyle = {
 };
 
 function AccountManagement() {
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
@@ -15,6 +19,8 @@ function AccountManagement() {
     const [purchaseHistory, setPurchaseHistory] = useState([]);
     const [historyError, setHistoryError] = useState('');
     const [showHistory, setShowHistory] = useState(false);
+    const [reviewing, setReviewing] = useState(null);
+    
 
     //SENDS THE NEW USERNAME TO BACKEND AND UPDATES THE DATABASE
     const handleUsernameChange = async (event) => {
@@ -131,6 +137,21 @@ function AccountManagement() {
     return (
         <div>
             <h1>Account Management</h1>
+
+            <section>
+                {localStorage.getItem('packer_type') === "seller" && (
+                    <Link to="/seller/create-ticket">
+                        <button>Support Ticket</button>
+                    </Link>
+                        )}
+                {localStorage.getItem('packer_type') === "buyer" && (
+                    <Link to="/buyer/create-ticket">
+                        <button>Support Ticket</button>
+                    </Link>
+                )}
+
+            </section>
+
             <section>
             <h2>Change Username</h2>
             <form onSubmit={handleUsernameChange}>
@@ -232,6 +253,17 @@ function AccountManagement() {
                                         >
                                             Request Refund
                                         </button>
+                                        <button 
+                                            type="button" 
+                                            onClick={() => 
+                                                setReviewing(item.listingId)
+                                            }
+                                        >
+                                            Leave Review
+                                        </button>
+                                        <button onClick={() => navigate(`/item/${item.listingId}`)}>
+                                            View Item
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -249,6 +281,16 @@ function AccountManagement() {
     </div>
 )}
 </section>
+{reviewing !== null && (
+    <CreateReview 
+        listingId={reviewing}
+        onClose={() => setReviewing(null)}
+        onSaved={(updated) => {
+            setMessage('Review submitted successfully.');
+            setReviewing(null);
+        }}
+    />
+)}
 </div>
 );
 }

@@ -1,12 +1,11 @@
 import express from 'express';
 import {pool} from '../../config/db.js';
-import {verifyToken} from '../../config/auth.js';
 
 
 const router = express.Router()
 
 //GETS THE LOGGED IN BUYERS CART AND LISTING DETAILS
-router.get('/cart', verifyToken, async(req,res) => {
+router.get('/cart', async(req,res) => {
     try{
         const result = await pool.query(
             `SELECT cart.listing_id, cart.quantity AS cart_quantity,
@@ -26,7 +25,7 @@ router.get('/cart', verifyToken, async(req,res) => {
 });
 
 //ADDS A LISTING TO THE CART
-router.post('/cart',verifyToken, async(req,res) => {
+router.post('/cart', async(req,res) => {
     const {listing_id, quantity} = req.body;
     const listingId = Number(listing_id);
     const amount = Number(quantity);
@@ -48,7 +47,7 @@ router.post('/cart',verifyToken, async(req,res) => {
         //PREVENTS BUYER FROM ADDING LISTINGS THAT DO NOT EXIST OR ARE INapproved
         if(
             listingResult.rows.length === 0 ||
-            listingResult.rows[0].status !== 'approved'
+            listingResult.rows[0].status !== 'active'
         ){
             return res.status(404).json({
                 message: 'Listing is unavailable'
@@ -88,7 +87,7 @@ router.post('/cart',verifyToken, async(req,res) => {
 });
 
 //CHANGE ITEM QUANTITY
-router.patch('/cart/:listingId', verifyToken, async (req, res) => {
+router.patch('/cart/:listingId', async (req, res) => {
     const listingId = Number(req.params.listingId);
     const quantity = Number(req.body.quantity);
     //ENSURES POSITIVE INTS
@@ -110,7 +109,7 @@ try {
         WHERE cart.account_id = $2
         AND cart.listing_id = $3
         AND listing.id = cart.listing_id
-        AND listing.status = 'approved'
+        AND listing.status = 'active'
         AND $1 <= listing.quantity
         RETURNING cart.listing_id, cart.quantity`,
        [quantity, req.user.id, listingId]
@@ -132,7 +131,7 @@ try {
 });
 
 //REMOVING AN ITEM FROM CART
-router.delete('/cart/:listingId', verifyToken, async (req,res) => {
+router.delete('/cart/:listingId', async (req,res) => {
     const listingId = Number(req.params.listingId);
 
     if (!Number.isInteger(listingId) || listingId < 1) {
@@ -161,7 +160,7 @@ router.delete('/cart/:listingId', verifyToken, async (req,res) => {
 });
 
 //CREATES A SIMULATED ORDER
-router.post('/checkout', verifyToken, async (req, res) => {
+router.post('/checkout', async (req, res) => {
     const userId = req.user.id;
     const client = await pool.connect();
 
@@ -174,11 +173,12 @@ router.post('/checkout', verifyToken, async (req, res) => {
                 cart.listing_id,
                 cart.quantity AS cart_quantity,
                 listing.listing_name,
-                listing.price
+                listing.price,
+                listing.quantity AS available_stock
              FROM cart
              JOIN listing ON listing.id = cart.listing_id
              WHERE cart.account_id = $1
-               AND listing.status = 'approved'
+               AND listing.status = 'active'
              FOR UPDATE OF listing`,
             [userId]
         );
@@ -189,6 +189,15 @@ router.post('/checkout', verifyToken, async (req, res) => {
             return res.status(400).json({
                 message: 'Your cart is empty.'
             });
+        }
+
+        // CHECK AVAILABLE STOCK
+        for (const item of cartResult.rows)
+        {
+            if(item.cart_quantity > item.available_stock) {
+                await client.query('ROLLBACK')
+                return res.status(400).json({ message: `Not enough in stock for ${item.listing_name}. Currently in stock: ${item.available_stock}.` });
+            }
         }
 
         const orderResult = await client.query(
@@ -214,6 +223,12 @@ router.post('/checkout', verifyToken, async (req, res) => {
                     item.price
                 ]
             );
+
+            // UPDATE STOCK IN LISTINGS
+            await client.query(
+                `UPDATE listing SET quantity = quantity - $1 WHERE id = $2`,
+                [item.cart_quantity, item.listing_id]
+            );
         }
         //CLEARS BUYER CART AFTER ORDER IS SAVED
         await client.query(
@@ -222,6 +237,20 @@ router.post('/checkout', verifyToken, async (req, res) => {
         );
 
         await client.query('COMMIT');
+
+        // WEB SOCKET
+        const io = req.app.get('io');
+
+        const deliveryInfo = {
+            orderID: order.id,
+            shippingInfo: req.body,
+            message: 'New order ready for delivery'
+        };
+        
+        // SEND SHIPPING INFO OVER WEB SOCKET
+        io.emit('new_oder_place', deliverInfo);
+
+        console.log("New order shipping info: ", deliveryInfo);
 
         res.status(201).json({
             message: 'Checkout successful! Your order can be viewed in purchase history.',
