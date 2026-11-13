@@ -184,7 +184,10 @@ useEffect(() => {
               <td>{listing.quantity}</td>
               <td>{listing.condition}</td>
               <td>{listing.price}</td>
-              <td><img src={listing.image} alt={listing.listing_name} width="100" />
+              <td>{listing.image && (
+                    <img src={`${import.meta.env.VITE_API_URL}/media/${listing.image}`}
+                        alt={listing.listing_name} width ="100"/>
+                )}
               </td>
               <td>{listing.description}</td>
               <td>{listing.status}</td>
