@@ -94,8 +94,9 @@ function ItemDetails() {
       ) : (
         <p>Loading Item Details...</p>
       )}
-      <label>Amount: </label>
+      <label htmlFor="amount">Amount: </label>
       <input
+        id = "amount"
         type="number"
         value={itemAmount}
         onChange={(event) => {

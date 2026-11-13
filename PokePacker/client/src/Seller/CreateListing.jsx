@@ -84,7 +84,7 @@ function CreateListing() {
             <h1> Create a Listing! </h1>
             {/* CREATE LISTING INFO */}
             <form onSubmit={sendListing}>
-                <label>Listing Name: </label>
+                <label htmlFor="listing_name">Listing Name: </label>
                 <input
                     id = "listing_name"
                     name = "listing_name"
@@ -93,14 +93,14 @@ function CreateListing() {
                     onChange={handleChange}
                     required
                 />
-                <label>Description: </label>
+                <label htmlFor="description">Description: </label>
                 <textarea
                     id = "description"
                     name = "description"
                     value={form.description}
                     onChange={handleChange}
                 />
-                <label>Quantity: </label>
+                <label htmlFor="quantity">Quantity: </label>
                 <input
                     id = "quantity"
                     name = "quantity"
@@ -111,7 +111,7 @@ function CreateListing() {
                     onChange={handleChange}
                     required
                 />
-                <label>Condition: </label>
+                <label htmlFor="condition">Condition: </label>
                 {/*
                 <input
                     id = "condition"
@@ -137,7 +137,7 @@ function CreateListing() {
 
                 </select>
 
-                <label>Price: </label>
+                <label htmlFor="price">Price: </label>
                 <input
                     id = "price"
                     name = "price"
@@ -149,7 +149,7 @@ function CreateListing() {
                     required
                 />
 
-                <label> Listing Image: </label>
+                <label htmlFor="image"> Listing Image: </label>
                 <input
                     id="image"
                     name="image"

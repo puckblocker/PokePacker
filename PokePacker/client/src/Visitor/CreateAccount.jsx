@@ -39,20 +39,23 @@ function CreateAccount() {
       <h1> Create an Account! </h1>
       {/* CREATE ACCOUNT INFO */}
       <form onSubmit={handleUserForm}>
-        <label>Username: </label>
+        <label htmlFor="username">Username: </label>
         <input
+          id="username"
           type="text"
           value={userName}
           onChange={(event) => setUserName(event.target.value)}
         />
-        <label>Email: </label>
+        <label htmlFor="email">Email: </label>
         <input
+          id="email"
           type="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <label>Password: </label>
+        <label htmlFor="password">Password: </label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
