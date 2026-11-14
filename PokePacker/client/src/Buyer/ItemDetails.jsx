@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function ItemDetails() {
   const { id } = useParams();
@@ -128,6 +128,19 @@ function ItemDetails() {
 
   return (
     <div>
+
+      {localStorage.getItem("packer_type") === 'buyer' && (
+        <Link to="/buyer/home">
+          <button>Back to Home</button>
+        </Link>
+      )}
+
+      {localStorage.getItem("packer_type") === 'seller' && (
+        <Link to="/seller/home">
+          <button>Back to Home</button>
+        </Link>
+      )}
+
       <h1> Item Details</h1>
       {item ? (
         <div>
@@ -138,6 +151,7 @@ function ItemDetails() {
           <p>Item Description: {item.description}</p>
           <img
             src={`${import.meta.env.VITE_API_URL}/media${item.image}`}
+            alt={item.listing_name} width="100"
             style={{ maxWidth: "200px" }}
           />
         </div>

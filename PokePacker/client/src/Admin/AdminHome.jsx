@@ -199,15 +199,12 @@ function getAuthHeaders() {
     <div>
      <LogoutButton />
       <h1>Welcome to PokéPacker! (Admin)</h1>
-
+        <Link to="/admin/support-tickets">
+          <button>View Support Tickets</button>
+        </Link>
       {/* ACCOUNTS AWAITING APPROVAL */}
       <h2>Buyer Accounts Awaiting Approval</h2>
 
-      <Link to="/admin/support-tickets">
-        <button>View Support Tickets</button>
-      </Link>
-
-      <h2>Accounts Awaiting Approval..</h2>
       {error && <p>{error}</p>}
       {message && <p>{message}</p>}
 

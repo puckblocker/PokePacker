@@ -129,7 +129,6 @@ function BuyerHome() {
         <button>Account Management</button>
       </Link>
 
-      <h2>Marketplace</h2>
           <h2 style={{ marginTop: "24px" }}>Marketplace</h2>
 
           {cartMessage && (
@@ -173,7 +172,7 @@ function BuyerHome() {
                       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                         {item.image && (
                           <img
-                            src={`${import.meta.env.VITE_API_URL}${item.image}`}
+                            src={`${import.meta.env.VITE_API_URL}/media${item.image}`}
                             alt={item.listing_name}
                             width="90"
                             style={{ objectFit: "contain" }}
@@ -235,6 +234,10 @@ function BuyerHome() {
                         disabled={Number(item.quantity) < 1}
                       >
                         Add to Cart
+                      </button>
+
+                      <button onClick={() => navigate(`/item/${item.id}`)}>
+                        View Item
                       </button>
                     </td>
                   </tr>

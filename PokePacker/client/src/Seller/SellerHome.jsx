@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import EditListing from "./EditListing";
 import LogoutButton from "../LogoutButton.jsx";
 
@@ -10,6 +10,7 @@ function SellerHome() {
   // MADISON CODE: Adding a notif for refund request  
   const [refundRequests, setRefundRequests] = useState([]);
   const [editing, setEditing] = useState(null);
+  const navigate = useNavigate();
 
 // GETTING LISTINGS FROM SERVER
 useEffect(() => {
@@ -167,31 +168,59 @@ useEffect(() => {
 
       <table>
         <thead>
-          <tr>
-            <th>Listing Name</th>
-            <th>Quantity</th>
-            <th>Condition</th>
-            <th>Price</th>
-            <th>Image</th>
-            <th>Description</th>
-            <th>Status</th>
+          <tr style={{ backgroundColor: "#f0f0f0" }}>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Listing Name
+            </th>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Quantity
+            </th>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Condition
+            </th>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Price
+            </th>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Image
+            </th>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Description
+            </th>
+            <th style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>
+              Status
+            </th>
+
           </tr>
         </thead>
         <tbody>
           {listings.map((listing) => (
             <tr key={listing.id}>
-              <td>{listing.listing_name}</td>
-              <td>{listing.quantity}</td>
-              <td>{listing.condition}</td>
-              <td>{listing.price}</td>
-              <td><img src={listing.image} alt={listing.listing_name} width="100" />
+              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.listing_name}</td>
+              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.quantity}</td>
+              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.condition}</td>
+              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.price}</td>
+              <td>
+                <img 
+                  src={`${import.meta.env.VITE_API_URL}/media${listing.image}`} 
+                  alt={listing.listing_name} width="100"
+                  style={{ objectFit: "contain" }}
+                />
               </td>
-              <td>{listing.description}</td>
-              <td>{listing.status}</td>
+              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.description}</td>
+              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.status}</td>
               <th></th>
               <td>
                 <button onClick={() => setEditing(listing)}>Edit</button>
+                
+                {listing.status === 'active' && (
+                  <button onClick={() => navigate(`/item/${listing.id}`)}>
+                    View Item
+                  </button>
+                )}
+
                 <button onClick={() => removeListing(listing.id)}>Remove</button>
+
               </td>
             </tr>
           ))}

@@ -67,7 +67,7 @@ function SupportTickets() {
                     <thead>
                         <tr>
                             <th>Ticket ID</th>
-                            <th>Account ID</th>
+                            <th>Username</th>
                             <th>Subject</th>
                             <th>Description</th>
                             <th>Status</th>
@@ -78,7 +78,7 @@ function SupportTickets() {
                         {tickets.map((ticket) => (
                             <tr key={ticket.id}>
                                 <td>{ticket.id}</td>
-                                <td>{ticket.account_id}</td>
+                                <td>{ticket.username}</td>
                                 <td>{ticket.subject}</td>
                                 <td>{ticket.description}</td>
                                 <td>{ticket.status}</td>

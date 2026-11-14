@@ -143,13 +143,25 @@ function AccountManagement() {
                     <Link to="/seller/create-ticket">
                         <button>Support Ticket</button>
                     </Link>
-                        )}
+                )}
+                        
+                {localStorage.getItem("packer_type") === 'seller' && (
+                    <Link to="/seller/home">
+                        <button>Back to Home</button>
+                    </Link>
+                )}
+
                 {localStorage.getItem('packer_type') === "buyer" && (
                     <Link to="/buyer/create-ticket">
                         <button>Support Ticket</button>
                     </Link>
                 )}
 
+                {localStorage.getItem("packer_type") === 'buyer' && (
+                    <Link to="/buyer/home">
+                        <button>Back to Home</button>
+                    </Link>
+                )}      
             </section>
 
             <section>

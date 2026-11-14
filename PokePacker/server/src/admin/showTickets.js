@@ -15,7 +15,9 @@ router.get('/showTickets', verifyToken, async (req, res) => {
 
     try {
         const result = await pool.query(
-            `SELECT * FROM support_tickets
+            `SELECT s.id, s.subject, s.description, s.status, s.created_at, a.username
+            FROM support_tickets s
+            JOIN account a ON a.id = s.account_id
             ORDER BY created_at DESC`
         );
         res.status(200).json(result.rows);
