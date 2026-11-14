@@ -179,6 +179,7 @@ router.post('/checkout', async (req, res) => {
              JOIN listing ON listing.id = cart.listing_id
              WHERE cart.account_id = $1
                AND listing.status = 'active'
+             ORDER BY listing.id ASC
              FOR UPDATE OF listing`,
             [userId]
         );
