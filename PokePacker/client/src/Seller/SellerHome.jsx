@@ -200,7 +200,14 @@ useEffect(() => {
               <td>{listing.quantity}</td>
               <td>{listing.condition}</td>
               <td>{listing.price}</td>
-              <td><img src={listing.image} alt={listing.listing_name} width="100" />
+              <td>
+                {listing.image &&(
+                  <img 
+                    src={`${import.meta.env.VITE_API_URL}/media${listing.image}`}
+                    alt={listing.listing_name} width="100" 
+                    style={{ objectFit: "contain" }}
+                  />
+                )}
               </td>
               <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.description}</td>
               <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.status}</td>
