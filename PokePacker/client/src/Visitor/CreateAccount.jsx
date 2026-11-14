@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CreateAccount() {
   // VARIABLES
@@ -6,6 +7,9 @@ function CreateAccount() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   // SEND USER INFO TO BACKEND
   async function handleUserForm(event) {
@@ -27,17 +31,37 @@ function CreateAccount() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
-        },
+        }
       );
+
+      if (!response.ok) {
+        throw new Error("Could not create account. Please try again.");
+      }
+
+      setMessage(
+        "Account created successfully! You must now await admin approval before you can log in."
+      );
+
+      setUserName("");
+      setEmail("");
+      setPassword("");
+
     } catch (error) {
       console.error("Error: ", error);
+      setError(error.message);
     }
   }
 
   return (
     <div>
       <h1> Create an Account! </h1>
+      <button type="button" onClick={() => navigate("/")}>
+        Back to Visitor Page
+      </button>
+<br />
       {/* CREATE ACCOUNT INFO */}
+      {message && <p>{message}</p>}
+      {error && <p>{error}</p>}
       <form onSubmit={handleUserForm}>
         <label htmlFor="username">Username: </label>
         <input

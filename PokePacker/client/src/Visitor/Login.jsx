@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   // VARIABLES
@@ -70,6 +71,9 @@ function Login() {
   return (
     <div>
       <h1> Login Page </h1>
+      <button type="button" onClick={() => navigate("/")}>
+        Back to Visitor Page
+      </button>
       {/* CREATE ACCOUNT INFO */}
       <form onSubmit={handleLoginForm}>
         <label htmlFor="username">Username: </label>

@@ -72,6 +72,7 @@ function BuyerHome() {
       const data = await response.json();
       setSellerStatus(data);
     }
+
     getListings();
     getSellerStatus();
   }, []);
@@ -248,7 +249,7 @@ function BuyerHome() {
         <p>Your seller application is awaiting approval.</p>
       )}
 
-      {sellerStatus?.status === "approved" && (
+      {sellerStatus?.status === "active" && (
         <p>
           Congratulations! Your seller application was approved.
           Please log out and log back in.
