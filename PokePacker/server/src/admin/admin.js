@@ -102,7 +102,7 @@ router.patch('/approve-listing/:id', async (req, res) => {
     try {
         const result = await pool.query(
             `UPDATE listing
-             SET status = 'active'
+             SET status = 'approved'
              WHERE id = $1 AND status = 'pending'
              RETURNING id`,
             [req.params.id]
@@ -124,7 +124,7 @@ router.patch('/reject-listing/:id', async (req, res) => {
     try {
         const result = await pool.query(
             `UPDATE listing
-             SET status = 'removed'
+             SET status = 'denied'
              WHERE id = $1 AND status = 'pending'
              RETURNING id`,
             [req.params.id]

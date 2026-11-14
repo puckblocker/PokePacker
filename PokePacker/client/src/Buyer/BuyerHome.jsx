@@ -12,7 +12,7 @@ function BuyerHome() {
   const [cartMessage, setCartMessage] = useState("");
   const [quantities, setQuantities] = useState({});
 
-  // LOADS ALL ACTIVE MARKETPLACE LISTINGS
+  // LOADS ALL APPROVED MARKETPLACE LISTINGS
   async function getListings() {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/marketplace`,
@@ -58,23 +58,24 @@ function BuyerHome() {
   }
 
   // CHECK SELLER APPLICATION STATUS AND CURRENT LSITINGS WHEN PAGE LOADS
-  useEffect(() => {
-    async function getSellerStatus() {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/seller-request`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("packer_token")}`,
-          },
-        }
-      );
+useEffect(() => {
+  async function getSellerStatus() {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/seller-request`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("packer_token")}`,
+        },
+      }
+    );
 
-      const data = await response.json();
-      setSellerStatus(data);
-    }
-    getListings();
-    getSellerStatus();
-  }, []);
+    const data = await response.json();
+    setSellerStatus(data);
+  }
+
+  getListings();
+  getSellerStatus();
+}, []);
 
   // HANDLE SEARCH FORM
   function handleSearchForm(event) {

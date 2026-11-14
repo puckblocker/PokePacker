@@ -11,7 +11,7 @@ router.get("/marketplace", verifyToken, async (req, res) => {
       `SELECT id, seller_id, listing_name, price, image,
               description, condition, quantity
        FROM listing
-       WHERE status = 'active'
+       WHERE status = 'approved'
        ORDER BY id DESC`
     );
 
