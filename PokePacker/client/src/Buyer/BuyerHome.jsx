@@ -249,7 +249,7 @@ function BuyerHome() {
         <p>Your seller application is awaiting approval.</p>
       )}
 
-      {sellerStatus?.status === "active" && (
+      {sellerStatus?.status === "approved" && (
         <p>
           Congratulations! Your seller application was approved.
           Please log out and log back in.
