@@ -85,7 +85,7 @@ function Cart() {
   const updateQuantity = async (listingId, quantity) => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/cart/${listingId}`,
+        `${import.meta.env.VITE_API_URL}api/cart/${listingId}`,
         {
           method: "PATCH",
           headers: {

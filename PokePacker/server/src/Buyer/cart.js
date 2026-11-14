@@ -47,7 +47,7 @@ router.post('/cart', async(req,res) => {
         //PREVENTS BUYER FROM ADDING LISTINGS THAT DO NOT EXIST OR ARE INapproved
         if(
             listingResult.rows.length === 0 ||
-            listingResult.rows[0].status !== 'approved'
+            listingResult.rows[0].status !== 'active'
         ){
             return res.status(404).json({
                 message: 'Listing is unavailable'
@@ -109,7 +109,7 @@ try {
         WHERE cart.account_id = $2
         AND cart.listing_id = $3
         AND listing.id = cart.listing_id
-        AND listing.status = 'approved'
+        AND listing.status = 'active'
         AND $1 <= listing.quantity
         RETURNING cart.listing_id, cart.quantity`,
        [quantity, req.user.id, listingId]
@@ -178,7 +178,7 @@ router.post('/checkout', async (req, res) => {
              FROM cart
              JOIN listing ON listing.id = cart.listing_id
              WHERE cart.account_id = $1
-               AND listing.status = 'approved'
+               AND listing.status = 'active'
              FOR UPDATE OF listing`,
             [userId]
         );
