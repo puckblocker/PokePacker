@@ -43,3 +43,7 @@ Meeting Minutes:
 11/7/2026 7:40-8:40
   -Discussed progress on sprint 4
   -Determined which parts still need to be completed and determine who shall finish what
+11/13/2026 10:00-10:30
+  -Determined which parts of sprint 4 are completely done.
+  -Discussed what needs further work going into sprint 5
+  -Finishing touches on project and getting it submission ready
