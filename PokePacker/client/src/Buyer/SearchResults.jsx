@@ -16,6 +16,11 @@ function SearchResults() {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/search?q=${query}`,
         );
+
+        if (!response.ok) {
+          setResults([]);
+          return;
+        }
         const data = await response.json();
         setResults(data);
       } catch (error) {

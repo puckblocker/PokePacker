@@ -44,3 +44,20 @@ VALUES (7, 'delivered'),
        (8, 'shipped'),
        (8, 'pending'),
        (9, 'cancelled');
+
+INSERT INTO order_items (order_id, listing_id, listing_name, quantity, price)
+VALUES (1, 4, 'Wigglypuff - 105/094',                1, 470.00),
+       (1, 9, 'Jirachi ex - 102/128',                1, 48.00),
+       (2, 7, 'Pikachu ex - 054/128',                1, 124.00),
+       (4, 1, 'Eevee - 116/128 (30th Celebration) (Cosmos)', 1, 2400.00),
+       (4, 6, 'Mega Kangaskhan ex - 104/132',        1, 284.00),
+       (3, 4, 'Wigglypuff - 105/094',                1, 470.00),
+       (5, 9, 'Jirachi ex - 102/128',                1, 48.00),
+       (6, 2, 'Psyduck - 226/217',                   1, 3585.00);
+
+INSERT INTO refund_requests (order_item_id, buyer_id, seller_id, status)
+VALUES (1, 7, 3, 'approved'),
+       (2, 7, 4, 'pending'),
+       (3, 7, 3, 'denied'),
+       (4, 8, 2, 'pending'),
+       (5, 8, 3, 'approved');

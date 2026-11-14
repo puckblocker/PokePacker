@@ -72,6 +72,7 @@ function BuyerHome() {
       const data = await response.json();
       setSellerStatus(data);
     }
+
     getListings();
     getSellerStatus();
   }, []);

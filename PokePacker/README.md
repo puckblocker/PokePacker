@@ -27,3 +27,23 @@ cd client
 npm install
 npm run dev
 ```
+
+## Test Logins
+
+| Username | Password | Account Type|
+| --- | --- | --- |
+| admin_poke | Test123! | admin|
+| seller_mads| Testmads! | seller|
+| seller_nath | Testnathalie! | seller |
+| seller_bray | Testbrayden! | seller |
+| seller_seth | Testseth! | seller (pending) |
+| seller_snorlax | Testsnorlax! | seller (denied) |
+| charizardfan1 | Testcharizard! | buyer |
+| iluvpikachu | Testpikachu! | buyer |
+| eeveeiscute| Testeevee! | buyer (pending)|
+| mewtwoisbest | Testmewtoo! | buyer (banned)|
+
+## How to Run Test Files
+1. Nagivate to client folder
+2. Run command `npx vitest run` to run all test files
+3. Run command `npx vitest run [name of test file]` to run specifc test files

@@ -196,16 +196,11 @@ useEffect(() => {
         <tbody>
           {listings.map((listing) => (
             <tr key={listing.id}>
-              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.listing_name}</td>
-              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.quantity}</td>
-              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.condition}</td>
-              <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.price}</td>
-              <td>
-                <img 
-                  src={`${import.meta.env.VITE_API_URL}/media${listing.image}`} 
-                  alt={listing.listing_name} width="100"
-                  style={{ objectFit: "contain" }}
-                />
+              <td>{listing.listing_name}</td>
+              <td>{listing.quantity}</td>
+              <td>{listing.condition}</td>
+              <td>{listing.price}</td>
+              <td><img src={listing.image} alt={listing.listing_name} width="100" />
               </td>
               <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.description}</td>
               <td style={{ padding: "12px", borderBottom: "1px solid #ddd" }}>{listing.status}</td>

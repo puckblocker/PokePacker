@@ -114,7 +114,7 @@ try {
         RETURNING cart.listing_id, cart.quantity`,
        [quantity, req.user.id, listingId]
     );
-    //ITEM IS INapproved, NOT FOUND, OR QUANTITY EXCEEDS STOCK
+    //ITEM IS INACTIVE, NOT FOUND, OR QUANTITY EXCEEDS STOCK
     if(result.rows.length === 0){
         return res.status(400).json({
             message: 'Item not found or quantity exceeds available stock'

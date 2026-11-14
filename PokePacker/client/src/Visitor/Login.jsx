@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   // VARIABLES
@@ -63,23 +64,29 @@ function Login() {
       }
     } catch (error) {
       console.error("Error: ", error);
+      setError("Could not reach the server. Please try again.") // Login Test 4 
     }
   }
 
   return (
     <div>
       <h1> Login Page </h1>
+      <button type="button" onClick={() => navigate("/")}>
+        Back to Visitor Page
+      </button>
       {/* CREATE ACCOUNT INFO */}
       <form onSubmit={handleLoginForm}>
-        <label>Username: </label>
+        <label htmlFor="username">Username: </label>
         <input
+          id="username"
           type="text"
           value={userName}
           onChange={(event) => setUserName(event.target.value)}
           required
         ></input>
-        <label>Password: </label>
+        <label htmlFor="password">Password: </label>
         <input
+          id="password"
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
